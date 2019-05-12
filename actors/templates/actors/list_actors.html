@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+    <hr>
+    <h1>배우 목록</h1>
+    <ul>
+    {% for actor in actors %}
+        <li>{{actor.name}}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

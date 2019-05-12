@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+    <hr>
+    <h1>수상 목록</h1>
+    <ul>
+    {% for prize in prizes %}
+        <li>{{prize.name}}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

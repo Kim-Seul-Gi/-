@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block body %}
+    <hr>
+    <h3>{{actor.name}}</h3>
+    <img src="{{actor.image}}" width="480px" height="480px"><br>
+    
+    {% if actor.instagram %}
+        <a href="{{actor.instagram}}"><img src="{% static 'actors/instagram_icon.png' %}" width="22px" height="22px"></a><br>
+    {% endif %}
+    {% if actor.twitter %}
+        <a href="{{actor.twitter}}"><img src="{% statics 'actors/twitter_icon.png' %}" width="22px" height="225px"></a><br>
+    {% endif %}
+    {% if actor.facebook %}
+        <a href="{{actor.facebook}}"><img src="{% statics 'actors/facebook_icon.png' %}" width="22px" height="22px"></a><br>
+    {% endif %}
+    
+    
+
+
+
+
+
+{% endblock %}
