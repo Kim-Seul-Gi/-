@@ -15,7 +15,6 @@ def signup(request):
         if user_form.is_valid():
             user = user_form.save()
             auth_login(request, user)
-            print('생성되었다.')
             return redirect('accounts:index')    
     else:
         user_form = UserCustomCreationForm()
@@ -31,7 +30,6 @@ def login(request):
         login_form = AuthenticationForm(request, request.POST)
         if login_form.is_valid():
             auth_login(request, login_form.get_user())
-            print('됫냐')
             return redirect('accounts:index')
     else:
         login_form = AuthenticationForm()

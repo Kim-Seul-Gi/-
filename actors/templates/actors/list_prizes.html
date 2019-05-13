@@ -4,7 +4,22 @@
     <h1>수상 목록</h1>
     <ul>
     {% for prize in prizes %}
-        <li>{{prize.name}}</li>
+        <li>
+            <h3>{{prize.name}}</h3>
+            <p>수상 배우</p>
+            <ul>
+            {% for actor in prize.actors.all %}
+                    <li><a href="{% url 'actors:actor_detail' actor.pk  %}">{{actor.name}}</a></li>
+            {% endfor %}
+            </ul><br>
+            
+            <p>수상작</p>
+            <ul>
+            {% for movie in prize.movies.all %}
+                    <li><a href="{% url 'movies:movie_detail' movie.pk  %}">{{movie.title}}</a></li>
+            {% endfor %}
+            </ul>
+        </li>
     {% endfor %}
     </ul>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Movie, Genre
+from .models import Movie, Genre, Director
+from actors.models import Actor
 # Create your views here.
 # genre.json import 방법:
 # $ python manage.py loaddata genre.json
@@ -27,4 +28,16 @@ def genre_movies(request, genre_id):
 
     return render(request, 'movies/genre_movies.html', context)
     
-    
+def actor_movies(request, actor_id):
+    actor = get_object_or_404(Actor, pk=actor_id)
+    print(actor)
+    print(actor.movies.all())
+    context = {'actor':actor}
+    return render(request, 'movies/actor_movies.html', context)
+
+def director(request, director_id):
+    director = get_object_or_404(Director, pk=director_id)
+    print(director)
+    print(director.id)
+    context = {'director':director}
+    return render(request, 'movies/director.html',context)

@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from movies.models import *
+from movies.models import Genre, Movie
 
 # Create your models here.
 class Actor(models.Model):
@@ -14,12 +14,13 @@ class Actor(models.Model):
     
     def __str__(self):
         return 'Actor name : {}'.format(self.name)
-        
+
+
 
 class Prize(models.Model):
     name = models.CharField(max_length=100)
-    actors = models.ManyToManyField(Actor,related_name="actor_prize",blank=True)
-    movies = models.ManyToManyField(Movie,related_name="movie_prize",blank=True)
+    actors = models.ManyToManyField(Actor,related_name="actor_prizes",blank=True)
+    movies = models.ManyToManyField(Movie,related_name="movie_prizes",blank=True)
     date = models.CharField(max_length=40,blank=True)
     
     def __str__(self):

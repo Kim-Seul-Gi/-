@@ -1,6 +1,13 @@
 <h1>{{movie}}</h1>
+감독 : <a href="{% url 'movies:director' movie.director.id %}">{{movie.director}}</a>
 {% for genre in movie.genres.all %}
 {{genre}}
-{% endfor%}
+{% endfor %}
+<br>
+
+{% for actor in movie.movie_actors.all %}
+<a href="{% url 'movies:actor_movies' actor.id %}">{{actor}}</a>
+<br>
+{% endfor %}
 
 

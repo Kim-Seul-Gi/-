@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% block body %}
     <hr>
-    <h3>{{actor.name}}</h3>
+    <h1>{{actor.name}}</h1>
     <img src="{{actor.image}}" width="480px" height="480px"><br>
+    
+    {% if user.pk %}
+    <a href="#">좋은 배우 추가</a>
+    <% endif %}
     
     {% if actor.instagram %}
         <a href="{{actor.instagram}}"><img src="{% static 'actors/instagram_icon.png' %}" width="22px" height="22px"></a><br>
@@ -14,10 +18,32 @@
         <a href="{{actor.facebook}}"><img src="{% statics 'actors/facebook_icon.png' %}" width="22px" height="22px"></a><br>
     {% endif %}
     
+    <p>생일 : {{actor.birthday}}</p>
     
-
-
-
-
-
+    <hr>
+    <h3>츨현 영화</h3>
+    <ul>
+    {% for movie in actor.movies.all %}
+        <li>
+            <img src="{{movie.imageurl}}" width="480px" height="480px"><br>
+            <a href="{% url 'movies:movie_detail' movie.pk  %}">{{movie.title}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    
+    <hr>
+    <h3>수상 목록</h3>
+    <ul>
+    {% for prize in actor.actor_prize.all %}
+        <li>
+            <h5>{{prize.name}}</h5>
+            <p>date : {{prize.name}}</p>
+            {% for prize_movie in prize.movies.all %}
+                {% if prize_movie in actor.movies.all %}
+                    <p><a href="{% url 'movies:movie_detail' prize_movie.pk  %}">{{prize_movie.title}}</a></p>
+                {% endif %}
+            {% endfor %}
+        </li>
+    {% endfor %}
+    </ul>
 {% endblock %}

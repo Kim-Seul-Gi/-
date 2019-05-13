@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 
 # genre.json import 방법:
@@ -9,13 +8,19 @@ class Genre(models.Model):
     
     def __str__(self):
         return self.name
+
+class Director(models.Model):
+    name = models.CharField(max_length=100)
+    imageurl = models.CharField(max_length=100)
+    birthday = models.CharField(max_length=40, blank=True)
+
     
 class Movie(models.Model):
     
     title = models.CharField(max_length=100)
     imageurl = models.CharField(max_length=100)
     score = models.IntegerField(default=0)
-    director = models.CharField(max_length=50, blank=True)
+    director = models.ForeignKey(Director, blank=True, on_delete=models.CASCADE)
     release_date = models.CharField(max_length=20)
     overview = models.CharField(max_length=1000, default='')
     
