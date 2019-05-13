@@ -1,0 +1,127 @@
+<!DOCTYPE html> {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Teko" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon.png' %}" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'movies/hamburger.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/index.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/movielist.css' %}">
+    <link rel="stylesheet" media="(max-width:600px)" href="{% static 'movies/index-2-small.css' %}">
+    <link rel="stylesheet" media="(max-width:600px)" href="{% static 'movies/movielist-2-small.css' %}">
+    <title>Blockbuster</title>
+</head>
+
+<body>
+
+    <section>
+        <nav class="navbar">
+            <div id="nav-logo">
+                <a href="{% url 'movies:movie_index' %}"><img src="{% static 'logo.png' %}" alt=""></a>
+            </div>
+            <div id="nav-auth">
+                <!-- <button class="openbtn" onclick="openNav()">&#9776;</button>. -->
+                <button id="hamburgerBtn" class="openbtn closebtn hamburger hamburger--collapse " onclick="hamburger()" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+            <div id="nav-collapsed-side-bar">
+                <a href="#">For you</a>
+                <a href="#">Review it</a>
+                <a href="#">Q & A</a>
+                <a href="#">Sign Up</a> {% if user.is_authenticated %}
+                <a href="{% url 'accounts:logout' %}">Logout</a> {% endif %}
+                <hr id="nav-collapsed-side-bar-hr">
+                <div id="nav-collapsed-side-bar-quote">
+                    <p>Remember Red, hope is a good thing. maybe the best of things, and no good thing ever dies.
+                        <br><br> - Shawshank Redemption
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <!--header hero-->
+        <header id="header-hero">
+            
+        </header>
+        
+        <article id="movie-recommend-box">
+            {% for movie in movies %}
+                <div class="movie-recommend-list">
+                    <img src="{{movie.imageurl}}" alt="">
+                </div>
+            {% endfor %}
+        </article>
+        
+    </section>
+
+
+    <script>
+        let sideBarStatus = false
+        function openNav() {
+            document.getElementById("nav-collapsed-side-bar").style.width = "400px";
+            document.getElementById("nav-auth").style.marginLeft = "250px";
+        }
+
+        /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("nav-collapsed-side-bar").style.width = "0";
+            document.getElementById("nav-auth").style.marginLeft = "0";
+        }
+            
+        // hamburger trigger
+        function hamburger() {
+            const hamburgerClassList = document.querySelector("#hamburgerBtn")
+            const navSideBar = document.querySelector('#nav-collapsed-side-bar')
+            if (hamburgerClassList.classList.contains("is-active")) {
+                hamburgerClassList.classList.remove("is-active")
+                document.getElementById("nav-collapsed-side-bar").style.width = "0";
+                document.getElementById("nav-auth").style.marginLeft = "0";
+                document.getElementById("nav-auth").style.zIndex = '100';
+                navSideBar.style.zIndex = '1';
+            } else {
+                hamburgerClassList.classList.add("is-active")
+                document.getElementById("nav-collapsed-side-bar").style.width = "400px";
+                document.getElementById("nav-auth").style.marginLeft = "250px";
+                document.getElementById("nav-auth").style.zIndex = '100';
+                navSideBar.style.zIndex = '1';
+            }
+        }
+        
+        window.addEventListener('scroll', function() {
+            let navbar = document.querySelector('.navbar')
+            if (document.documentElement.scrollTop > 20){
+
+                navbar.classList.add('sticky-top')
+                
+            } else {
+
+                navbar.classList.remove('sticky-top')
+                
+            }
+        })
+        
+        // $(window).on('scroll', function(){
+        //     $(".navbar").addClass('sticky-top');
+            
+        //     if ($(this).scrollTop() > 20) {
+        //         $("#nav-link").css("cssText", "display: none !important;");
+        //         // $(".navbar").css("cssText", "min-height:60px !important");
+        //         $(".navbar").css({"min-height":"60px", "transition" : "0.3s ease"});
+        //     }
+        //     else {
+        //         $("#nav-link").css("cssText", "display: inline-block !important;");
+        //         $(".navbar").css({"min-height":"80px", "transition" : "0.3s ease"});
+        //     }
+        // });
+        
+    </script>
+</body>
+
+</html>

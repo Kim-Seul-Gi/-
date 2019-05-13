@@ -2,16 +2,19 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 
 # Create your views here.
-def list_actors(request):
+def actors_list(request):
     actors = Actor.objects.all()
-    return render(request,'actors/list_actors.html',{'actors':actors})
+    context={'actors':actors}
+    return render(request,'actors/actors_list.html',context)
     
-def list_prizes(request):
+def prizes_list(request):
     prizes = Prize.objects.all()
-    return render(request,'actors/list_prizes.html',{'prizes':prizes})
+    context={'prizes':prizes}
+    return render(request,'actors/prizes_list.html',context)
     
-def detail_actor(request,actor_pk):
-    actor = get_object_or_404(Actors,pk=actor_pk)
-    return render(request,'actors/detail_actor.html',{'actor':actor})
+def actor_detail(request, actor_pk):
+    actor = get_object_or_404(Actor, pk=actor_pk)
+    context={'actor':actor}
+    return render(request,'actors/actor_detail.html',context)
     
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href={% static 'movies/evaluate.css' %}>
+    <link rel="stylesheet" media="(max-width:600px)" href="index-2-small.css">
+    <title>Document</title>
+</head>
+<body>
+    <!--기본크기는 500 717 가로 세로 -->
+    <h1>영화 평가하기</h1>
+    <span>{{user}}님, 영화를 평가해주세요</span>
+    <div id="overview">
+        {% for movie in movies %}
+        
+        <div class="movie_box">
+            
+            <div class="show_movie">
+                <img class="show_poster" src={{movie.imageurl}} alt=""><br>
+            </div>
+            
+            <br>
+            
+            
+            <span class="show_text"><a href="{% url 'movies:movie_detail' movie.id %}">{{movie}}</a></span>
+            
+            
+        </div>
+        
+        {% endfor %}
+        
+        
+    </div>
+    
+</body>
+</html>

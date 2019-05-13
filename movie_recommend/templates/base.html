@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    로그인 ID : {{user}}
-    <br>
+    <p>로그인 ID : {{user}}</p>
     <a href="{% url 'accounts:signup' %}">회원가입하기</a>
     <a href="{% url 'accounts:login' %}">로그인</a>
     <a href="{% url 'accounts:logout' %}">로그아웃</a><br>
+    <hr>
     {% block body %}
     {% endblock %}
     

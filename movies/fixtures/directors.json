@@ -1,5 +1,14 @@
 [
     {
+        "pk": 1302082,
+        "model": "movies.Director",
+        "fields": {
+            "name": "David F. Sandberg",
+            "imageurl": "https://image.tmdb.org/t/p/w500/10p2i4OW0JWAbnOb7yMLUEGdSqM.jpg",
+            "birthday": "1985-12-23"
+        }
+    },
+    {
         "pk": 19271,
         "model": "movies.Director",
         "fields": {
@@ -9,12 +18,21 @@
         }
     },
     {
-        "pk": 1302082,
+        "pk": 53069,
         "model": "movies.Director",
         "fields": {
-            "name": "David F. Sandberg",
-            "imageurl": "https://image.tmdb.org/t/p/w500/10p2i4OW0JWAbnOb7yMLUEGdSqM.jpg",
-            "birthday": "1985-12-23"
+            "name": "Anna Boden",
+            "imageurl": "https://image.tmdb.org/t/p/w500/h5YMXdI42zb0uqn5UJHF4fT9AER.jpg",
+            "birthday": "1976-09-20"
+        }
+    },
+    {
+        "pk": 65630,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Rob Letterman",
+            "imageurl": "https://image.tmdb.org/t/p/w500/v2GPTQ41ZqHtML8W1ft3UJej5xA.jpg",
+            "birthday": 0
         }
     },
     {
@@ -27,11 +45,11 @@
         }
     },
     {
-        "pk": 65630,
+        "pk": 1297518,
         "model": "movies.Director",
         "fields": {
-            "name": "Rob Letterman",
-            "imageurl": "https://image.tmdb.org/t/p/w500/v2GPTQ41ZqHtML8W1ft3UJej5xA.jpg",
+            "name": "Kazuaki Imai",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
             "birthday": 0
         }
     },
@@ -45,21 +63,12 @@
         }
     },
     {
-        "pk": 1586194,
+        "pk": 1495940,
         "model": "movies.Director",
         "fields": {
-            "name": "Jenny Gage",
-            "imageurl": "https://image.tmdb.org/t/p/w500/wdvHWFssy6KAliSrY89pvszBlmO.jpg",
-            "birthday": 0
-        }
-    },
-    {
-        "pk": 1297518,
-        "model": "movies.Director",
-        "fields": {
-            "name": "Kazuaki Imai",
-            "imageurl": "https://image.tmdb.org/t/p/w500None",
-            "birthday": 0
+            "name": "Frankie Chen",
+            "imageurl": "https://image.tmdb.org/t/p/w500/3jfec79vr7xVdgW8qJgTdheYXyt.jpg",
+            "birthday": "1974-09-21"
         }
     },
     {
@@ -81,12 +90,21 @@
         }
     },
     {
-        "pk": 1495940,
+        "pk": 1586194,
         "model": "movies.Director",
         "fields": {
-            "name": "Frankie Chen",
-            "imageurl": "https://image.tmdb.org/t/p/w500/3jfec79vr7xVdgW8qJgTdheYXyt.jpg",
-            "birthday": "1974-09-21"
+            "name": "Jenny Gage",
+            "imageurl": "https://image.tmdb.org/t/p/w500/wdvHWFssy6KAliSrY89pvszBlmO.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 84124,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Tina Gordon Chism",
+            "imageurl": "https://image.tmdb.org/t/p/w500/2Vho1qUJBLUPlgh3c4bnXTPKZUs.jpg",
+            "birthday": 0
         }
     },
     {
@@ -117,11 +135,11 @@
         }
     },
     {
-        "pk": 84124,
+        "pk": 1481804,
         "model": "movies.Director",
         "fields": {
-            "name": "Tina Gordon Chism",
-            "imageurl": "https://image.tmdb.org/t/p/w500/2Vho1qUJBLUPlgh3c4bnXTPKZUs.jpg",
+            "name": "Tomoka Nagaoka",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
             "birthday": 0
         }
     },
@@ -132,15 +150,6 @@
             "name": "Ryan Coogler",
             "imageurl": "https://image.tmdb.org/t/p/w500/ddGaRFrlDdyR0OBTd1hAMWnfvim.jpg",
             "birthday": "1986-05-23"
-        }
-    },
-    {
-        "pk": 39189,
-        "model": "movies.Director",
-        "fields": {
-            "name": "Stephen Merchant",
-            "imageurl": "https://image.tmdb.org/t/p/w500/A70Gtg3kkTeCBgtFkSRPu9qfPQu.jpg",
-            "birthday": "1974-11-24"
         }
     },
     {
@@ -162,12 +171,678 @@
         }
     },
     {
-        "pk": 1481804,
+        "pk": 39189,
         "model": "movies.Director",
         "fields": {
-            "name": "Tomoka Nagaoka",
+            "name": "Stephen Merchant",
+            "imageurl": "https://image.tmdb.org/t/p/w500/A70Gtg3kkTeCBgtFkSRPu9qfPQu.jpg",
+            "birthday": "1974-11-24"
+        }
+    },
+    {
+        "pk": 510,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Tim Burton",
+            "imageurl": "https://image.tmdb.org/t/p/w500/yHEHAHQpN9PfSEQx1UxZPczhcAi.jpg",
+            "birthday": "1958-08-25"
+        }
+    },
+    {
+        "pk": 15218,
+        "model": "movies.Director",
+        "fields": {
+            "name": "James Gunn",
+            "imageurl": "https://image.tmdb.org/t/p/w500/2w2mprJhSucgA8pbM5BRdBKl3p9.jpg",
+            "birthday": "1966-08-05"
+        }
+    },
+    {
+        "pk": 1607672,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Michael Chaves",
+            "imageurl": "https://image.tmdb.org/t/p/w500/SOd71vk0kx5cJygzCifEOMGjRW.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 59918,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Rodney Rothman",
+            "imageurl": "https://image.tmdb.org/t/p/w500/3GlFmeP4me6uxZGVsmnC0d4A5BV.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 150630,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Nicholas McCarthy",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
+            "birthday": "1970-11-10"
+        }
+    },
+    {
+        "pk": 55934,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Taika Waititi",
+            "imageurl": "https://image.tmdb.org/t/p/w500/zCLBXGo5BS2e27srDBa5WpRnKul.jpg",
+            "birthday": "1975-08-16"
+        }
+    },
+    {
+        "pk": 1362815,
+        "model": "movies.Director",
+        "fields": {
+            "name": "David Yarovesky",
+            "imageurl": "https://image.tmdb.org/t/p/w500/fNaQfVEnSrK6ff2bEaatRsEtMO2.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 231084,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Chee Keong Cheung",
+            "imageurl": "https://image.tmdb.org/t/p/w500/gxvTUIuvWkoQa9BpapQZiha4R8K.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 69237,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Joe Berlinger",
+            "imageurl": "https://image.tmdb.org/t/p/w500/nm1QiopjjZLypVQUjJkJ3SkEGnB.jpg",
+            "birthday": "1961-10-30"
+        }
+    },
+    {
+        "pk": 366,
+        "model": "movies.Director",
+        "fields": {
+            "name": "James Mangold",
+            "imageurl": "https://image.tmdb.org/t/p/w500/1gt0VmCyBHhQLKhaBDCEIwvRWe.jpg",
+            "birthday": "1963-12-16"
+        }
+    },
+    {
+        "pk": 1306608,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Adam Robitel",
+            "imageurl": "https://image.tmdb.org/t/p/w500/ujwEsVKMCN0JD6Mx2PlfSqmbxd1.jpg",
+            "birthday": "1978-05-28"
+        }
+    },
+    {
+        "pk": 59026,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Peyton Reed",
+            "imageurl": "https://image.tmdb.org/t/p/w500/aucXNycAtFREMIKr6ikmHvd2Mmp.jpg",
+            "birthday": "1964-07-03"
+        }
+    },
+    {
+        "pk": 291263,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Jordan Peele",
+            "imageurl": "https://image.tmdb.org/t/p/w500/9rOEfvKUInuUpJ6MMhiC8Tch1WM.jpg",
+            "birthday": "1979-02-21"
+        }
+    },
+    {
+        "pk": 54040,
+        "model": "movies.Director",
+        "fields": {
+            "name": "John Lee Hancock",
+            "imageurl": "https://image.tmdb.org/t/p/w500/1eCqzsuFp0xKGeTEErXyEifN82U.jpg",
+            "birthday": "1956-12-15"
+        }
+    },
+    {
+        "pk": 1196401,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Tomonori Sudou",
+            "imageurl": "https://image.tmdb.org/t/p/w500/eTPynNLvv0K8tHbsIWaAaPVhWZR.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 19850,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Catherine Hardwicke",
+            "imageurl": "https://image.tmdb.org/t/p/w500/x8qMlCXpXlM66hOZ7dSMMWnojNo.jpg",
+            "birthday": "1955-10-21"
+        }
+    },
+    {
+        "pk": 1100748,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Frant Gwo",
+            "imageurl": "https://image.tmdb.org/t/p/w500/ifiWmvaHho8kmjyt9ZCBwd9j6c4.jpg",
+            "birthday": "1980-12-15"
+        }
+    },
+    {
+        "pk": 1033661,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Travis Knight",
+            "imageurl": "https://image.tmdb.org/t/p/w500/rn207qabc6oJ8JFSH7ekS9hYDXb.jpg",
+            "birthday": "1973-09-13"
+        }
+    },
+    {
+        "pk": 2127,
+        "model": "movies.Director",
+        "fields": {
+            "name": "James Wan",
+            "imageurl": "https://image.tmdb.org/t/p/w500/9AlAMoHVDUX8GVOTw6JOyKil8k9.jpg",
+            "birthday": "1977-02-27"
+        }
+    },
+    {
+        "pk": 66212,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Timo Vuorensola",
+            "imageurl": "https://image.tmdb.org/t/p/w500/vOvgjfKURnz7HledfDyEY3JfQ9Z.jpg",
+            "birthday": "1979-11-29"
+        }
+    },
+    {
+        "pk": 2294,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Robert Rodriguez",
+            "imageurl": "https://image.tmdb.org/t/p/w500/bPqRdLWWwpOT8sBdj9PWOzNgwou.jpg",
+            "birthday": "1968-06-20"
+        }
+    },
+    {
+        "pk": 74619,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Sean Anders",
+            "imageurl": "https://image.tmdb.org/t/p/w500/o3DDfIrbhETjJxuORuTEbm29DIU.jpg",
+            "birthday": "1969-01-01"
+        }
+    },
+    {
+        "pk": 40644,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Chad Stahelski",
+            "imageurl": "https://image.tmdb.org/t/p/w500/hr82USXEc8XWvdnH0TpyddMpi7j.jpg",
+            "birthday": "1968-09-20"
+        }
+    },
+    {
+        "pk": 54248,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Christopher Landon",
+            "imageurl": "https://image.tmdb.org/t/p/w500/421KrcuMkPQnKbIvdp2yyFE4D0I.jpg",
+            "birthday": "1975-02-27"
+        }
+    },
+    {
+        "pk": 88857,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Dome Karukoski",
+            "imageurl": "https://image.tmdb.org/t/p/w500/4lkhkvoVu5pUQE04kQS27Ynncoe.jpg",
+            "birthday": "1976-12-26"
+        }
+    },
+    {
+        "pk": 15277,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Jon Favreau",
+            "imageurl": "https://image.tmdb.org/t/p/w500/sJSGJwGa3hjMlJNUCxF7wQwo7fb.jpg",
+            "birthday": "1966-10-19"
+        }
+    },
+    {
+        "pk": 11181,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Kenneth Branagh",
+            "imageurl": "https://image.tmdb.org/t/p/w500/bmpGjbqvAVNOK3ggiuET2Jl96tZ.jpg",
+            "birthday": "1960-12-10"
+        }
+    },
+    {
+        "pk": 19272,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Joe Russo",
+            "imageurl": "https://image.tmdb.org/t/p/w500/679Os4tbY1YsU01KdLhM1NPXNWu.jpg",
+            "birthday": "1971-07-08"
+        }
+    },
+    {
+        "pk": 80602,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Tyler Perry",
+            "imageurl": "https://image.tmdb.org/t/p/w500/fdBvkrv4lSKZ97eDLpmjlK1Tnbx.jpg",
+            "birthday": "1969-09-13"
+        }
+    },
+    {
+        "pk": 11694,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Doug Liman",
+            "imageurl": "https://image.tmdb.org/t/p/w500/cWpE3dSbskWOea4kAGzQpNIkfxM.jpg",
+            "birthday": "1965-07-24"
+        }
+    },
+    {
+        "pk": 1293994,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Jon Watts",
+            "imageurl": "https://image.tmdb.org/t/p/w500/5CKKBhuScdsHs2KPBBx5pveMOQQ.jpg",
+            "birthday": "1981-06-28"
+        }
+    },
+    {
+        "pk": 9888,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Claire Denis",
+            "imageurl": "https://image.tmdb.org/t/p/w500/v3dZPE1f1ICeF3m2GYYFvwuqvfT.jpg",
+            "birthday": "1946-04-21"
+        }
+    },
+    {
+        "pk": 11343,
+        "model": "movies.Director",
+        "fields": {
+            "name": "David Yates",
+            "imageurl": "https://image.tmdb.org/t/p/w500/fiIZNbwdK07ntpE2wpLRIMuSXEy.jpg",
+            "birthday": "1963-11-30"
+        }
+    },
+    {
+        "pk": 190,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Clint Eastwood",
+            "imageurl": "https://image.tmdb.org/t/p/w500/n8h4ZHteFFXfmzUW6OEaPWanDnm.jpg",
+            "birthday": "1930-05-31"
+        }
+    },
+    {
+        "pk": 567562,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Phil Johnston",
+            "imageurl": "https://image.tmdb.org/t/p/w500/jCaUirgugytyigPpexIyUU1laLQ.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 64151,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Mike Mitchell",
+            "imageurl": "https://image.tmdb.org/t/p/w500/thoCDW89KWWaSYrbvUX0adPcg8S.jpg",
+            "birthday": "1970-10-18"
+        }
+    },
+    {
+        "pk": 37932,
+        "model": "movies.Director",
+        "fields": {
+            "name": "F. Gary Gray",
+            "imageurl": "https://image.tmdb.org/t/p/w500/6p11B9eBjvoiAY5Nyoao6Pm7a2J.jpg",
+            "birthday": "1969-07-17"
+        }
+    },
+    {
+        "pk": 4945,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Joe Johnston",
+            "imageurl": "https://image.tmdb.org/t/p/w500/fbGZo6CG9Z9zKFh8D5wHunyu7gJ.jpg",
+            "birthday": "1950-05-13"
+        }
+    },
+    {
+        "pk": 128276,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Otto Bathurst",
+            "imageurl": "https://image.tmdb.org/t/p/w500/vojDKrTe52mnPrYSKUTOLWotEIN.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 58656,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Doug Lefler",
             "imageurl": "https://image.tmdb.org/t/p/w500None",
             "birthday": 0
+        }
+    },
+    {
+        "pk": 47005,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Alan Taylor",
+            "imageurl": "https://image.tmdb.org/t/p/w500/f8hPlHuaRw1py22wp2qqNRfVDMw.jpg",
+            "birthday": "1965-01-01"
+        }
+    },
+    {
+        "pk": 18899,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Yuen Woo-ping",
+            "imageurl": "https://image.tmdb.org/t/p/w500/7gr04tWDnsBHHmo18aYLWXZHAvC.jpg",
+            "birthday": "1945-01-01"
+        }
+    },
+    {
+        "pk": 17633,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Rob Marshall",
+            "imageurl": "https://image.tmdb.org/t/p/w500/eK6o1eP4aZTnowGYc1NUnEdvCNJ.jpg",
+            "birthday": "1960-10-17"
+        }
+    },
+    {
+        "pk": 1354171,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Henry Hobson",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 9032,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Bryan Singer",
+            "imageurl": "https://image.tmdb.org/t/p/w500/ts06thbCv9Ug2mNpcbcrmLGRL4Q.jpg",
+            "birthday": "1965-09-17"
+        }
+    },
+    {
+        "pk": 91268,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Ruben Fleischer",
+            "imageurl": "https://image.tmdb.org/t/p/w500/y001RIxie7Vk3qMW3oLSFkjO1IA.jpg",
+            "birthday": "1974-10-31"
+        }
+    },
+    {
+        "pk": 55499,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Scott Derrickson",
+            "imageurl": "https://image.tmdb.org/t/p/w500/2498q7kKjApqbUMh4WEMxbtSDjn.jpg",
+            "birthday": "1966-07-16"
+        }
+    },
+    {
+        "pk": 17496,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Jacques Audiard",
+            "imageurl": "https://image.tmdb.org/t/p/w500/dJ2XCySH5NKZTEEapYK3RaBtL61.jpg",
+            "birthday": "1952-04-30"
+        }
+    },
+    {
+        "pk": 26714,
+        "model": "movies.Director",
+        "fields": {
+            "name": "John R. Leonetti",
+            "imageurl": "https://image.tmdb.org/t/p/w500/uksq1bamaA4MfpBPaP4Vv8BvLpu.jpg",
+            "birthday": "1956-07-04"
+        }
+    },
+    {
+        "pk": 155531,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Joe Cornish",
+            "imageurl": "https://image.tmdb.org/t/p/w500/yJNJ0haP69aPf3fhiCJXvlESDss.jpg",
+            "birthday": "1968-12-20"
+        }
+    },
+    {
+        "pk": 108,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Peter Jackson",
+            "imageurl": "https://image.tmdb.org/t/p/w500/kSrfI3TbMdIMmPVOflLQ56OfscB.jpg",
+            "birthday": "1961-10-31"
+        }
+    },
+    {
+        "pk": 56322,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Amy Poehler",
+            "imageurl": "https://image.tmdb.org/t/p/w500/uMGW762oDZbR8jhFJRImJ1ls5cd.jpg",
+            "birthday": "1971-09-16"
+        }
+    },
+    {
+        "pk": 36602,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Peter Berg",
+            "imageurl": "https://image.tmdb.org/t/p/w500/1pR16H0zqRG49ns8cYykYpodgGF.jpg",
+            "birthday": "1964-03-11"
+        }
+    },
+    {
+        "pk": 1709468,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Gerard McMurray",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 91493,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Chris Addison",
+            "imageurl": "https://image.tmdb.org/t/p/w500/cCVVvQIuVyNkUTDg34lgHZ9fuCr.jpg",
+            "birthday": "1971-11-05"
+        }
+    },
+    {
+        "pk": 5281,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Spike Lee",
+            "imageurl": "https://image.tmdb.org/t/p/w500/2KOHXgk2uoRXl6u7V9xpAIo3uay.jpg",
+            "birthday": "1957-03-20"
+        }
+    },
+    {
+        "pk": 7396,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Peter Farrelly",
+            "imageurl": "https://image.tmdb.org/t/p/w500/8vLjukhhj4dKQSbtZ8qFr2Ybf5T.jpg",
+            "birthday": "1956-12-17"
+        }
+    },
+    {
+        "pk": 10965,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Chris Columbus",
+            "imageurl": "https://image.tmdb.org/t/p/w500/2fHN78oumrJRM84UydgfVzj0YEl.jpg",
+            "birthday": "1958-09-10"
+        }
+    },
+    {
+        "pk": 40684,
+        "model": "movies.Director",
+        "fields": {
+            "name": "David Leitch",
+            "imageurl": "https://image.tmdb.org/t/p/w500/eVSgvAIsP6mwuVbbhVb4HkVvmsu.jpg",
+            "birthday": "1969-12-31"
+        }
+    },
+    {
+        "pk": 1419579,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Christian Rivers",
+            "imageurl": "https://image.tmdb.org/t/p/w500/qm9JrFiMFIkZCTAbM9scJVZIjOk.jpg",
+            "birthday": "1974-01-01"
+        }
+    },
+    {
+        "pk": 51329,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Bradley Cooper",
+            "imageurl": "https://image.tmdb.org/t/p/w500/w2iNEYKNuWzGfGzISeh4P6IiR4U.jpg",
+            "birthday": "1975-01-05"
+        }
+    },
+    {
+        "pk": 4499,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Tom Shadyac",
+            "imageurl": "https://image.tmdb.org/t/p/w500/8CtwYIVmCSDQ9F1SXFpifKW0N3v.jpg",
+            "birthday": "1958-12-11"
+        }
+    },
+    {
+        "pk": 47506,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Drew Goddard",
+            "imageurl": "https://image.tmdb.org/t/p/w500/j5Le3QQljdGJ3kPAcjAZr9V4QUC.jpg",
+            "birthday": "1975-02-26"
+        }
+    },
+    {
+        "pk": 51894,
+        "model": "movies.Director",
+        "fields": {
+            "name": "J.A. Bayona",
+            "imageurl": "https://image.tmdb.org/t/p/w500/cnbbnS7K8Uu6yohAfSRHv5Kxc7r.jpg",
+            "birthday": "1975-05-09"
+        }
+    },
+    {
+        "pk": 67367,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Rian Johnson",
+            "imageurl": "https://image.tmdb.org/t/p/w500/j7ACBDkCgMqf6sSz2XeCmfqGNd3.jpg",
+            "birthday": "1973-12-17"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "movies.Director",
+        "fields": {
+            "name": "George Lucas",
+            "imageurl": "https://image.tmdb.org/t/p/w500/8qxin8urtFE0NqaZNFWOuV537bH.jpg",
+            "birthday": "1944-05-14"
+        }
+    },
+    {
+        "pk": 222470,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Todd Strauss-Schulson",
+            "imageurl": "https://image.tmdb.org/t/p/w500/ebACQB0WKup42JE6epPJMdcLT0I.jpg",
+            "birthday": "1980-06-24"
+        }
+    },
+    {
+        "pk": 140151,
+        "model": "movies.Director",
+        "fields": {
+            "name": "William Bindley",
+            "imageurl": "https://image.tmdb.org/t/p/w500/7KWLEzEgfag8shGRQsbmmT9zEJl.jpg",
+            "birthday": 0
+        }
+    },
+    {
+        "pk": 6884,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Patty Jenkins",
+            "imageurl": "https://image.tmdb.org/t/p/w500/za4JYxjctECHLJJel3lEFPsbeht.jpg",
+            "birthday": "1971-07-24"
+        }
+    },
+    {
+        "pk": 2034,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Danny Boyle",
+            "imageurl": "https://image.tmdb.org/t/p/w500/b5qQpFHmgNyvV1t81ou17Jt2fRj.jpg",
+            "birthday": "1956-10-20"
+        }
+    },
+    {
+        "pk": 1018106,
+        "model": "movies.Director",
+        "fields": {
+            "name": "S. Craig Zahler",
+            "imageurl": "https://image.tmdb.org/t/p/w500/vomw5TlCtMtKFSsgOtwkit464nd.jpg",
+            "birthday": "1973-01-23"
+        }
+    },
+    {
+        "pk": 122423,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Yorgos Lanthimos",
+            "imageurl": "https://image.tmdb.org/t/p/w500/p6ykeQGWagu0wkLUJZX5xVtAkG8.jpg",
+            "birthday": "1973-05-27"
+        }
+    },
+    {
+        "pk": 78160,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Luca Guadagnino",
+            "imageurl": "https://image.tmdb.org/t/p/w500/lO2GD4s6fRloZLEhsZgBlhJQasE.jpg",
+            "birthday": "1971-08-10"
+        }
+    },
+    {
+        "pk": 15358,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Vic Armstrong",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
+            "birthday": "1946-10-05"
         }
     }
 ]

@@ -1,13 +1,34 @@
-<h1>{{movie}}</h1>
-감독 : <a href="{% url 'movies:director' movie.director.id %}">{{movie.director}}</a>
-{% for genre in movie.genres.all %}
-{{genre}}
-{% endfor %}
-<br>
+{% extends 'base.html' %}
+{% block body %}
 
-{% for actor in movie.movie_actors.all %}
-<a href="{% url 'movies:actor_movies' actor.id %}">{{actor}}</a>
-<br>
-{% endfor %}
+    <h1>{{movie}}</h1>
+    <img src="{{movie.imageurl}}"><br>
+    감독 : <a href="{% url 'movies:director' movie.director.id %}">{{movie.director}}</a><br>
+    {% for genre in movie.genres.all %}
+    {{genre}}
+    {% endfor %}
+    <br><br>
+    
+    {% for score in scores %}
+        {{score.user}} : {{score.score}} , {{score.content}}<br>
+    {% endfor %}    
+        
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="score">
+            <input type="text" name="content">
+            <input type='submit'>
+        </form>
+    
+    
+    
+    
+    <h3>배우 목록</h3>
+    {% for actor in movie.movie_actors.all %}
+    <a href="{% url 'actors:actor_detail' actor.id %}">{{actor}}</a>
+    <br>
+    {% endfor %}
+
+{% endblock %}
 
 

@@ -215,3 +215,44 @@ a{color:inherit;text-decoration:none}
 .foot-lnk{
 	text-align:center;
 }
+
+#kakao-login {
+	font-size: 1.25rem;
+	display: inline-block;
+	padding: 2.5%;
+	margin-bottom: 5%;
+	color: black;
+	/*height: ;*/
+	width: 100%;
+	background: rgba(255,238,51,0.99);
+}
+
+#kakao-login:hover {
+	background: rgba(255,238,51,0.59);
+}
+
+#github-login {
+	font-size: 1.25rem;
+	display: inline-block;
+	padding: 2.5%;
+	margin-bottom: 5%;
+	color: #fff;
+	/*height: ;*/
+	width: 100%;
+	background: #24292e;
+}
+
+#naver-login {
+	font-size: 1.25rem;
+	display: inline-block;
+	padding: 2.5%;
+	margin-bottom: 10%;
+	color: #fff;
+	/*height: ;*/
+	width: 100%;
+	background: #00ca30;
+}
+
+#forgot-passsword {
+	font-size: 2vh;
+}

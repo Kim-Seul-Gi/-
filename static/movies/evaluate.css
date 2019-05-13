@@ -1,0 +1,37 @@
+body {
+    width:1000px;
+}
+
+#overview {
+    background: green;
+}
+
+.movie_box {
+    display:inline-block;
+    border:5px solid blue;
+    width:250px;
+    height:300px;
+    margin:10px;
+    text-align: center;
+    
+}
+
+.show_movie {
+    display:inline-block;
+    width:200px;
+    height:280px;
+    
+}
+
+.show_text {
+    display:inline-block;
+    width:250px;
+    height:100px;
+}
+
+.show_poster {
+    width:200px;
+    height:280px;
+}
+
+

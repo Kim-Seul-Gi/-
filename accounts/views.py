@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods, require_POST
 from .forms import UserCustomCreationForm, UserCustomAuthenticationForm
+
+from .models import Me_you_similar,Score
 # Create your views here.
 
 def index(request):
@@ -17,6 +21,14 @@ def signup(request):
         if user_form.is_valid():
             print("hello")
             user = user_form.save()
+            #-------------------------------
+            for you in get_user_model().objects.all():
+                temp = Me_you_similar(me=user,you=you)
+                temp.save()
+                temp = Me_you_similar(you=user,me=you)
+                temp.save()
+                
+            #-------------------------------
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('movies:movie_index')    
     else:
@@ -46,5 +58,8 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('movies:movie_index')
+    
+
+    
     
     

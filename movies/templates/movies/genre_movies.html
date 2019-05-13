@@ -1,4 +1,3 @@
 {% for movie in genre.genre_movies.all %}
 <a href="{% url 'movies:movie_detail' movie.id %}">{{movie}}</a><br>
-
 {% endfor %}

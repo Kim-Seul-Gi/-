@@ -5,8 +5,9 @@
     <ul>
     {% for actor in actors %}
         <li>
-            <img src="{{actor.image}}" width="100px" height="100px"><br>
-            <p>{{actor.name}}</p>
+            <img src="{{actor.imageurl}}" alt="" width="100px" height="100px"><br>
+            
+            <a href="{% url 'actors:actor_detail' actor.pk %}">{{actor.name}}</a><br>
         </li>
     {% endfor %}
     </ul>
