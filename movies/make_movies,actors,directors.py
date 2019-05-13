@@ -3,8 +3,11 @@ import os
 import requests
 import csv
 import pprint
-# key = os.getenv('TMDB_KEY')
-key = '303ac03dde1c0a18068c289ebff0ae94'
+# from decouple import config
+
+# key = config('TMDB_KEY') 
+# 현재는 안됩니다. 그러니까 하지 마세요. 물어보세요 낄낄낄
+key = ''
 
 # print(key)
 
@@ -15,23 +18,6 @@ url = f'https://api.themoviedb.org/3/movie/popular?api_key={key}&language=ko-kr&
 ## movie_text에 영화 정보들을 담을 예정입니다.
 movie_text={}
 response = requests.get(url).json()
-
-'''
-results = response['results'][-5]
-id = results['id']
-title = results['title']
-imageurl = 'https://image.tmdb.org/t/p/w500' + results['poster_path']
-score = int(results['vote_average'])
-release_date = results['release_date']
-overview = results['overview']
-genres = results['genre_ids']
-list = {'id':id,'title':title,
-                'imageurl':imageurl, 'score':score,
-                'release_date':release_date, 'overview':overview,
-                'genres':genres, 'director':''}
-# print(list)
-movie_text.update({f'{id}':list})
-'''
 
 results = response['results']
 for i in range(len(results)):
@@ -90,6 +76,7 @@ for j in movie_text:
         else:    
             actor_id = result2[k]['id']
             actor_name = result2[k]['name']
+            # acotr_image 도 여기서 추가하도록 하자.
             movies = [movie_cord]
 
         url5 = f'https://api.themoviedb.org/3/person/{actor_id}?api_key={key}&language=en-US'

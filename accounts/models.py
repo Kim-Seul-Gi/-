@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from imagekit.models import ProcessedImageField # 필드 선언
 from imagekit.processors import ResizeToFill    # 리사이징용
+from movies.models import Movie
 
 # Create your models here.
 
@@ -36,3 +37,10 @@ class User(AbstractUser):
                         related_name = 'followings'     # 상대방을 쉽게 참조하기 위해 
                 )
 
+class Score(models.Model):
+    
+    score = models.IntegerField(blank=True)
+    content = models.TextField()
+    movie = models.ForeignKey(Movie, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    

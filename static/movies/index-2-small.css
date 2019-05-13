@@ -1,0 +1,63 @@
+@media only screen and (max-width: 600px) {
+    /* .sidebar {padding-top: 15px;} */
+    /* .sidebar a {font-size: 18px;} */
+
+    body, html {
+        height: 100vh;
+    }
+
+    #nav-logo {
+        display: none !important;
+    }
+
+    #index-background {
+        height: 90vw !important;
+    }
+
+    #index-background-content-left {
+        /* display: flex-column; */
+        align-items: space-between;
+    }
+
+
+    #index-background-content-left > h1 {
+        font-size: 4.5vh;
+        margin-bottom: 20px;
+    }
+
+    #index-background-content-left > hr {
+        margin-bottom: 20px;
+    }
+
+    #index-background-content-left > p {
+        font-size: 1rem;
+    }
+
+    #nav-collapsed-side-bar {
+        padding-top: 10%;
+        background: black;
+    }
+
+    #small-index-background-2 {
+        display: block;
+        width: 100%;
+        height: 40vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/small-index-background-2.jpg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    #small-index-background-2 > p {
+        text-align: right;
+        padding: 5%;
+        padding-top: 50%;
+        color: white;
+        line-height: 2;
+    }
+
+    footer > p {
+        height: 10vh;
+        font-size: 4vw;
+    }
+
+}

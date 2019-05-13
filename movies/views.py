@@ -4,6 +4,10 @@ from actors.models import Actor
 # Create your views here.
 # genre.json import 방법:
 # $ python manage.py loaddata genre.json
+
+def index(request):
+    return render(request, 'movies/index.html')
+
 def lists(request):
     movies = Movie.objects.all()
     context = {'movies':movies}

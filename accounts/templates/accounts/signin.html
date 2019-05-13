@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'accounts/signin.css' %}">
+    <link rel="stylesheet" media="(max-width:600px)" href="{% static 'accounts/signin-2-small.css' %}">
+    <link rel="icon" href="{% static 'favicon.png' %}" sizes="16x16" type="image/png">
+    <title>Blockbuster - signin</title>
+</head>
+
+<body>
+
+    <div id="background"></div>
+
+    <section id="signup">
+
+        <!-- 메인으로 연결 -->
+        <div id="signup-logo">
+            <a href="{% url 'movies:movie_index' %}"><img src="{% static 'logo.png' %}" alt=""></a>
+        </div>
+
+        <!-- 로그인 폼 -->
+        <div id="login-box">
+            <form action="" method="POST">
+                {% csrf_token %}
+        
+                    <div class="login-html">
+                        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
+                            class="tab">Sign In</label>
+                        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">
+                            <!--SignUp-->
+                        </label>
+                        {% if user.is_authenticated %}
+                            <p> 이미 로그인 되어 있습니다. </p>
+                        {% else %}
+                        <div class="login-form">
+                            <div class="sign-in-htm">
+                                <div class="group">
+                                    <label for="user" class="label">Username</label>
+                                    <!--<input id="user" type="text" class="input">-->
+                                    {{login_form.username}}
+                                </div>
+                                <div class="group">
+                                    <label for="pass" class="label">Password</label>
+                                    <!--<input id="pass" type="password" class="input" data-type="password">-->
+                                    {{login_form.password}}
+                                </div>
+                                <div class="group">
+                                    <input type="submit" class="button" value="Sign In">
+                                </div>
+                                <div class="hr"></div>
+                                <div class="foot-lnk">
+                                    <a href="{% url 'accounts:signup' %}">회원가입</a><br><br><br><br>
+                                    <a href="#forgot">비밀번호를 잊으셨나요?</a>
+                                </div>
+                            </div>
+                    {% endif %}
+                            <!--<div class="sign-up-htm">-->
+                            <!--    <div class="group">-->
+                            <!--        <label for="user" class="label">Username</label>-->
+                                    <!--<input id="user" type="text" class="input">-->
+                            <!--        {{ user_form.username }}-->
+                            <!--    </div>-->
+                            <!--    <div class="group">-->
+                            <!--        <label for="pass" class="label">Password</label>-->
+                                    <!--<input id="pass" type="password" class="input" data-type="password">-->
+                            <!--        {{ user_form.password1 }}-->
+                            <!--    </div>-->
+                            <!--    <div class="group">-->
+                            <!--        <label for="pass" class="label">Repeat Password</label>-->
+                                    <!--<input id="pass" type="password" class="input" data-type="password">-->
+                            <!--        {{ user_form.password2 }}-->
+                            <!--    </div>-->
+                            <!--    <div class="group">-->
+                            <!--        <label for="pass" class="label">Email Address</label>-->
+                                    <!--<input id="pass" type="text" class="input">-->
+                            <!--        {{ user_form.email }}-->
+                            <!--    </div>-->
+                            <!--    <div class="group">-->
+                            <!--        <input type="submit" class="button" value="Sign Up">-->
+                            <!--    </div>-->
+                            <!--    <div class="hr"></div>-->
+                            <!--    <div class="foot-lnk">-->
+                            <!--        <label for="tab-1">이미 회원이시라면!</a>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                
+            </form>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

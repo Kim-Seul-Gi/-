@@ -1,0 +1,296 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #030104;
+    height: 100vh;
+    font-family: 'Noto Sans KR', 'Teko', sans-serif;
+}
+
+nav {
+    z-index: -1;
+    padding: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+#nav-logo {
+    width: 10%;
+}
+#nav-logo > a > img {
+    max-width: 100%;
+    box-shadow: 0 0px 0px 5px rgba(186, 0, 71, 0.5);
+
+}
+
+#index-background-content-left > h1 {
+    -webkit-animation: neon 3s ease-out infinite alternate; 
+}
+@-webkit-keyframes neon {
+  from {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px  #fff,
+               0 0 30px  #fff,
+               0 0 40px  #FF9900,
+               0 0 70px  #FF9900,
+               0 0 80px  #FF9900,
+               0 0 100px #FF9900,
+               /* 0 0 100px rgb(129, 17, 124); */
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+               0 0 10px #fff,
+               0 0 15px #fff,
+               0 0 20px #FF9900,
+               0 0 35px #FF9900,
+               0 0 40px #FF9900,
+               0 0 50px #FF9900,
+               0 0 75px rgba(255, 153, 0, 0.767);
+  }
+}
+
+#nav-auth {
+    width: 5%;
+    height: 100%;
+    line-height: normal;
+    vertical-align: middle;
+    border-radius: 50%;
+    
+}
+
+#nav-auth > a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    outline: none;
+    background: #d42542;
+    border-radius: 3px;
+    width: 100%;
+}
+
+#index-background {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/static/index-background.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* background-color: rgba(0,0,0, 0.8); */
+}
+
+
+#index-background:before {
+    -webkit-filter: grayscale(0) blur(0);
+    filter: grayscale(0) blur(0);
+    opacity: 0.5;
+}
+
+#index-background::after {
+    opacity: 0.5;
+}
+
+#nav-collapsed-side-bar {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.2); /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 120px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7)), url('assets/sidebar-background.jpg'); */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-weight: bold;
+}
+
+#nav-collapsed-side-bar-icons {
+    padding-top: 20%;
+    height: 5%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sns-icon {
+    max-width: 30%;
+
+}
+
+
+#nav-collapsed-side-bar-top {
+    height: 10%;
+    border-bottom: 1px solid white;
+}
+
+#nav-collapsed-side-bar a {
+    
+    /* padding: 8px 8px 8px 32px; */
+    text-decoration: none;
+    text-align: left;
+    font-size: 2rem;
+    color: white;
+    display: block;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    background-clip: text;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+            to right,
+            #ef0d33,
+            #ef0d33 50%,
+            #ccc 50%);
+            background-size: 200% 100%;
+            background-position: 100%;
+}
+
+#nav-collapsed-side-bar a:hover {
+    /* color : #d42542; */
+    transition: all 0.25s cubic-bezier(0.000, 0.000, 0.230, 1);
+    background-position: 0%; 
+    
+}
+
+
+
+#nav-collapsed-side-bar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#nav-collapsed-side-bar-hr {
+    margin-top: 23%;
+    margin-left: 10%;
+    width: 10%;
+    background: white;
+}
+
+#nav-collapsed-side-bar-quote {
+    display: flex;
+    /* margin-top: 30%; */
+    font-size: 1.5rem;
+    padding: 10%;
+}
+
+.openbtn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    background-color: #e50914;
+    color: white;
+    /* padding: 10px 15px; */
+    border: none;
+}
+  
+.openbtn:hover {
+    /* background-color: rgb(212, 37, 66, 0.5); */
+}
+
+#index-background-content {
+    height: 100%;
+    display: flex;
+}
+
+#index-background-content-left {
+    width: 50%;
+    /* padding-top: 1%; */
+    padding-left: 10%;
+    color: white;
+    font-size: 8vw;
+    text-align: left;
+}
+
+
+#index-background-content-left > p {
+    margin-top: 3%;
+    font-size: 2rem;
+    /* font-weight: bold; */
+}
+
+#index-background-content-left > h1 {
+    font-size: 8vw;
+    display: inline-block;
+    line-height: 1.25;
+}
+
+#index-background-content-left-bar {
+    margin-top: 2%;
+    width: 30%;
+    height: 1%;
+    background: #e50914;
+    border: none;
+}
+
+#index-background-content-left-signup-box {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#index-background-content-left-signup {
+    /* line-height: 3; */
+    margin-top: 5%;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    width: 10vw;
+    background: #e50914;
+    padding-left: 0.2%;
+    padding-top: 0.2%;
+    padding-bottom: 0.4%;
+    padding-right: 0.4%;
+    /* padding: 1%; */
+    font-size: 2.5vw;
+    border-radius: 5px;
+}
+
+#index-background-content-left-signup:hover {
+    background: rgb(212, 37, 66, 0.5);
+}
+
+#index-background-content-right {
+    width: 50%;
+}
+
+#hamburgerBtn {
+    outline: none;
+}
+
+.hamburger.is-active .hamburger-inner, 
+.hamburger.is-active .hamburger-inner::before, 
+.hamburger.is-active .hamburger-inner::after  {
+    background-color: #e50914 !important;
+}
+
+.hamburger-inner, .hamburger-inner::before, 
+.hamburger-inner::after {
+    background-color: #e50914 !important;
+}
+
+#small-index-background-2 {
+    display: none;
+}
+
+footer {
+    width: 100%;
+    height: 20vh;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 3rem;
+    justify-content: center;
+}
+
+footer > p {
+    line-height: 20vh;
+    font-size: 1vw;
+    text-align: center;
+}

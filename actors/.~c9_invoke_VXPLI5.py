@@ -5,17 +5,16 @@ from movies.models import Genre, Movie
 # Create your models here.
 class Actor(models.Model):
     name = models.CharField(max_length=100) #김슬기가 가져올 수 있음
-    imageurl = models.CharField(max_length=100,blank=True) #김슬기가 가져올 수 있음
+    image = models.ImageField(blank=True) #김슬기가 가져올 수 있음
     twitter = models.CharField(max_length=100,blank=True)
     instagram = models.CharField(max_length=100,blank=True)
     facebook = models.CharField(max_length=100,blank=True)
     birthday = models.CharField(max_length=40,blank=True) #김슬기가 가져올 수 있음
     movies = models.ManyToManyField(Movie,related_name="movie_actors",blank=True) #김슬기가 가져올 수 있음
     
-    # def __str__(self):
-    #     return 'Actor name : {}'.format(self.name)
     def __str__(self):
-        return self.name
+        return 'Actor name : {}'.format(self.name)
+    
 
 
 class Prize(models.Model):

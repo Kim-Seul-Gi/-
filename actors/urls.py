@@ -4,6 +4,7 @@ from . import views
 app_name = 'actors'
 
 urlpatterns = [
-    # 임시로 url 패턴 하나 만들어놨습니다. 마음껏 수정해주세요!
-    # path('', views.actors_list, name='actors_list'), 
+    path('', views.list_actors, name='actors_list'), 
+    path('<int:actor_pk>/', views.detail_actor, name='actor_detail'), 
+    path('prizes/', views.list_prizes, name='prizes_list'), 
 ]

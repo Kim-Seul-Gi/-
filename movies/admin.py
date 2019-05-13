@@ -6,7 +6,7 @@ class GenreAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('id','title','imageurl','score','director','release_date','overview')
+    list_display = ('id','title','imageurl','director','release_date','overview')
 
 
 admin.site.register(Genre, GenreAdmin)

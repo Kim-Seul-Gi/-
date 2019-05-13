@@ -9,15 +9,6 @@
         }
     },
     {
-        "pk": 53069,
-        "model": "movies.Director",
-        "fields": {
-            "name": "Anna Boden",
-            "imageurl": "https://image.tmdb.org/t/p/w500/h5YMXdI42zb0uqn5UJHF4fT9AER.jpg",
-            "birthday": "1976-09-20"
-        }
-    },
-    {
         "pk": 1302082,
         "model": "movies.Director",
         "fields": {
@@ -168,6 +159,15 @@
             "name": "John Lasseter",
             "imageurl": "https://image.tmdb.org/t/p/w500/7EdqiNbr4FRjIhKHyPPdFfEEEFG.jpg",
             "birthday": "1957-01-12"
+        }
+    },
+    {
+        "pk": 1481804,
+        "model": "movies.Director",
+        "fields": {
+            "name": "Tomoka Nagaoka",
+            "imageurl": "https://image.tmdb.org/t/p/w500None",
+            "birthday": 0
         }
     }
 ]
