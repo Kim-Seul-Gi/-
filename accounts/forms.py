@@ -55,4 +55,8 @@ class UserCustomChangeForm(UserChangeForm):
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name',)
         
-# class ScoreForm()
+
+class ScoreForm(forms.ModelForm):
+    class Meta:
+        model = Score
+        fields = ('score', 'content')

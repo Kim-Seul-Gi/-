@@ -54,6 +54,7 @@
         <article id="movie-recommend-box">
             {% for movie in movies %}
                 <div class="movie-recommend-list">
+                    <!--<a href="{% url 'movies:movie_detail' movie.id %}"><img src="{{movie.imageurl}}" alt=""></a>-->
                     <img src="{{movie.imageurl}}" alt="">
                 </div>
             {% endfor %}

@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods, require_POST
 from .models import Movie, Genre, Director
 from actors.models import Actor
 from accounts.models import *
-# from accounts.forms import ScoreForm
+from accounts.forms import ScoreForm
 
 # Create your views here.
 # genre.json import 방법:
@@ -19,10 +19,22 @@ def movie_lists(request):
     return render(request, 'movies/movies_list.html', context)
     
 def movie_detail(request, movie_id):
+    print(request.user)
+    
     movie = get_object_or_404(Movie, pk=movie_id)
-    scores = movie.movie_scores.all()
-    # score_form = ScoreForm()
-    context = {'movie':movie, 'scores':score}
+    
+    if request.method=='POST':
+        score_form = ScoreForm(request.POST)
+        if score_form.is_valid():
+            score = score_form.save(commit=False)
+            score.movie = movie
+            score.user = request.user
+            score.save()
+        
+    else:
+        score_form = ScoreForm()
+
+    context = {'movie':movie, 'score_form':score_form}
     return render(request, 'movies/movie_detail.html', context)
     
 def genre_list(request):
@@ -40,16 +52,6 @@ def director(request, director_id):
     context = {'director':director}
     return render(request, 'movies/director.html',context)
 
-'''
-@login_required
-@request_POST
-def create_score(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
-    
-    new_score = Score()
-    new_score
-
-'''
 @login_required       
 def movie_evaluate(request):
   movies = Movie.objects.all()
