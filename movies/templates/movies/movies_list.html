@@ -14,6 +14,8 @@
     <link rel="stylesheet" media="(max-width:600px)" href="{% static 'movies/index-2-small.css' %}">
     <link rel="stylesheet" media="(max-width:600px)" href="{% static 'movies/movielist-2-small.css' %}">
     <title>Blockbuster</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -22,6 +24,13 @@
         <nav class="navbar">
             <div id="nav-logo">
                 <a href="{% url 'movies:movie_index' %}"><img src="{% static 'logo.png' %}" alt=""></a>
+            </div>
+            <div id="SearchMovie" class="search-bar-box">
+                <form action="/movies/search_movie/" class="search-bar">
+                    <!--<input type="search" name="search" placeholder="영화 검색!" class="animated-search-form">-->
+                    <input type="search" v-model="movie_title" placeholder="영화 검색!" class="animated-search-form">
+                    {{movie_title}}
+                </form>
             </div>
             <div id="nav-auth">
                 <!-- <button class="openbtn" onclick="openNav()">&#9776;</button>. -->
@@ -32,6 +41,7 @@
                 </button>
             </div>
             <div id="nav-collapsed-side-bar">
+                <a href="#">My Page</a>
                 <a href="#">For you</a>
                 <a href="#">Review it</a>
                 <a href="#">Q & A</a>
@@ -48,22 +58,55 @@
         
         <!--header hero-->
         <header id="header-hero">
-            
+            <div id="header-hero-wrapper">
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <!--<div class="slideImage1" style="backgorund: url('static/good-will-hunting.jpg')"></div>-->
+                        <img src="{% static 'good-will-hunting.jpg' %}" style="max-width:100%;">
+                    </div>
+                
+                    <div class="mySlides fade">
+                        <img src="{% static 'the-great-gatsby.jpg' %}" style="max-width:100%;">
+                    </div>
+                
+                    <div class="mySlides fade">
+                        <img src="{% static 'the-pursuit-of-happiness.jpg' %}" style="max-width:100%;">
+                    </div>
+                    
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+            </div>
         </header>
         
-        <article id="movie-recommend-box">
+        <section id="movie-recommend-box">
+            <!--알고리즘 기반 사용자 맞춤 추천-->
+            <article id="movie-custom-recommend-box">   
+                
+            </article>
+            <!--장르 기반 사용자 맞춤 추천-->
+            <article id="movie-genres-recommend-box">
+                
+            </article>
+            <!--일반적으로 인기있는 작품 추천-->
+            <article id="movie-popular-recommend-box">
+                
+            </article>
+            
             {% for movie in movies %}
                 <div class="movie-recommend-list">
                     <!--<a href="{% url 'movies:movie_detail' movie.id %}"><img src="{{movie.imageurl}}" alt=""></a>-->
                     <img src="{{movie.imageurl}}" alt="">
                 </div>
             {% endfor %}
-        </article>
+        </section>
         
     </section>
 
 
     <script>
+    
+    // Side bar ===============================================================
         let sideBarStatus = false
         function openNav() {
             document.getElementById("nav-collapsed-side-bar").style.width = "400px";
@@ -94,34 +137,86 @@
                 navSideBar.style.zIndex = '1';
             }
         }
-        
+    // Side bar END ===============================================================
+    
+    
+    // Nav bar ===============================================================
         window.addEventListener('scroll', function() {
             let navbar = document.querySelector('.navbar')
-            if (document.documentElement.scrollTop > 20){
+            let hamburgerBtn = document.querySelector('#nav-auth')
+            if (document.documentElement.scrollTop > 30){
 
                 navbar.classList.add('sticky-top')
+                hamburgerBtn.classList.add('sticky-top-hamburger')
                 
             } else {
 
                 navbar.classList.remove('sticky-top')
-                
+                hamburgerBtn.classList.remove('sticky-top-hamburger')
             }
         })
+    // Nav bar END ===============================================================
+
+    
+    // Carousel ===============================================================
+        var slideIndex = 1;
+        showSlides(slideIndex);
         
-        // $(window).on('scroll', function(){
-        //     $(".navbar").addClass('sticky-top');
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+        
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1} 
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none"; 
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          slides[slideIndex-1].style.height = "70vh";
+          dots[slideIndex-1].className += " active";
+        }
+    // Carousel END ===============================================================
+        
+        
+    // 영화 검색을 실시간으로 보기 위한 vue 생성중 
+        
+        
+        const app = new Vue ({
+            el : '#SearchMovie'
+            data : {
+                movie_title : '',
+            },
             
-        //     if ($(this).scrollTop() > 20) {
-        //         $("#nav-link").css("cssText", "display: none !important;");
-        //         // $(".navbar").css("cssText", "min-height:60px !important");
-        //         $(".navbar").css({"min-height":"60px", "transition" : "0.3s ease"});
-        //     }
-        //     else {
-        //         $("#nav-link").css("cssText", "display: inline-block !important;");
-        //         $(".navbar").css({"min-height":"80px", "transition" : "0.3s ease"});
-        //     }
-        // });
-        
+            method : {
+                find : function() {
+                    if (this.movie_title) {
+                        axios.get(`http://tmp-movie-recommend-rlatmf2147.c9users.io:8080/movies/search_movie2/${movie_title}/`)
+                        .then(response => { 
+                            
+                        })
+                    }
+                },
+            },
+            watch  {
+                movie_title : function() {
+                    this.find()
+                }
+            },
+        })
+    
     </script>
 </body>
 

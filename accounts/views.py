@@ -23,10 +23,10 @@ def signup(request):
             user = user_form.save()
             #-------------------------------
             for you in get_user_model().objects.all():
-                temp = Me_you_similar(me=user,you=you)
-                temp.save()
-                temp = Me_you_similar(you=user,me=you)
-                temp.save()
+                if you != user:
+                    temp = Me_you_similar(me=user,you=you)
+                    temp.first_update()
+                    temp.save()
                 
             #-------------------------------
             auth_login(request, user, backend='django.contrib.auth.backends.ModelBackend')

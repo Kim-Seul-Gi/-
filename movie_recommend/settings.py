@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.kakao',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.google',
     
     # For User Profile Image
     'imagekit',
@@ -87,6 +88,7 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
+
 
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -170,3 +172,5 @@ LOGIN_REDIRECT_URL = 'movies:movie_index' # 로그인 후 리디렉션할 페이
 
 ACCOUNT_AUTHENTICATED_LOGOUT_REDIRECTS = True
 ACCOUNT_LOGOUT_REDIRECT_URL = "movies:movie_index"  # 로그아웃 후 리디렉션 할 페이지
+
+

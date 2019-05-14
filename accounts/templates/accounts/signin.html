@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <link rel="stylesheet" href="{% static 'accounts/signin.css' %}">
     <link rel="stylesheet" media="(max-width:600px)" href="{% static 'accounts/signin-2-small.css' %}">
     <link rel="icon" href="{% static 'favicon.png' %}" sizes="16x16" type="image/png">
@@ -55,9 +56,12 @@
                                 </div>
                                 <div class="hr"></div>
                                 <div class="foot-lnk">
+
                                     <a id="kakao-login" href="{% provider_login_url 'kakao' method='oauth2' %}">카카오톡으로 로그인하기</a><br>
+                                    
                                     <a id="github-login" href="{% provider_login_url 'github' method='oauth2' %}">깃허브로 로그인하기</a><br>
-                                    <a id="naver-login" href="{% provider_login_url 'naver' method='oauth2' %}">네이버로 로그인하기</a><br>
+                                    
+                                    <a id="google-login" href="{% provider_login_url 'google' method='oauth2' %}">구글로 로그인하기</a><br>
                                     <a href="{% url 'accounts:signup' %}">회원가입</a><br><br><br><br>
                                     <a id="forgot-passsword" href="#forgot">비밀번호를 잊으셨나요?</a>
                                 </div>
@@ -99,6 +103,7 @@
         </div>
 
     </section>
+
 
 </body>
 

@@ -59,4 +59,9 @@ class UserCustomChangeForm(UserChangeForm):
 class ScoreForm(forms.ModelForm):
     class Meta:
         model = Score
-        fields = ('score', 'content')
+        fields=('content',)
+        widgets = {
+            'content': forms.Textarea(attrs={'rows':4, 'cols':30}),
+        }
+        
+  

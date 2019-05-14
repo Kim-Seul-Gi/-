@@ -8,13 +8,22 @@
 {% endfor %}
 <br><br>
 
+
+<h2>댓글목록</h2>
 {% for score in movie.movie_scores.all %}
-    {{score.user}} : {{score.score}} , {{score.content}}<br>
+    작성자 : {{score.user}} , score : {{score.score}} , 내용 : {{score.content}}
+    {% if user == score.user or user.is_superuser %}
+    <a href="{% url 'movies:delete_score' movie.id score.id %}">댓글 삭제하기</a>
+    {% endif %}
+    
+    <br>
 {% endfor %}    
     
     {% if user.is_authenticated %}
+    <h2>댓글달기</h2>
     <form method="POST">
         {% csrf_token %}
+        score : <input type="number" min="1" max="10" name="score" value=0>
         {{score_form}}
         <input type='submit'>
     </form>
