@@ -41,7 +41,7 @@
                 </div>
                 <div id="nav-collapsed-side-bar">
                     <a href="{% url 'movies:movie_list' %}">For you</a>
-                    <a href="#">Review it</a>
+                    <a href="{% url 'movies:movie_evaluate' %}">Review it</a>
                     <a href="#">Q & A</a>
                     {% if user_is.authenticated == False %}
                     <a href="{% url 'accounts:signup' %}">Sign Up</a>

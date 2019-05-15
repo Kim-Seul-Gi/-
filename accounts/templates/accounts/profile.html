@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>user profile</title>
+</head>
+<body>
+    <h1>{{use.username}}</h1>
+    {% if use.image %}
+        <img src="{{ use.image.url }}"><br>
+    {% endif %}
+    
+    <p>email - {{use.email}}</p>
+    <p>nickname - {{use.nickname}}</p>
+    <p>좋아하는 장르</p>
+    <ul>
+        {% if use.like_genre_1 %}
+            <li>{{use.like_genre_1}}</li>
+        {% endif %}
+        {% if use.like_genre_2 %}
+            <li>{{use.like_genre_2}}</li>
+        {% endif %}
+        {% if use.like_genre_3 %}
+            <li>{{use.like_genre_3}}</li>
+        {% endif %}
+    </ul>
+    
+    <p>팔로우 받은 숫자 - {{use.followings.all.count}}</p>
+    <p>팔로우 한 숫자 - {{use.followers.all.count}}</p>
+    {% if user != use %}
+        {% if use in user.followers.all %}
+            <a href="{% url 'accounts:follow' use.pk %}" data-id="{{this_user.pk}}" id="follow">언팔로우~~</a>
+        {% else %}
+            <a href="{% url 'accounts:follow' use.pk %}" data-id="{{this_user.pk}}" id="follow">팔로우!</a>
+        {% endif %}
+    {% endif %}
+    
+    {% if user != use %}
+    <form method="POST">
+        <textarea name="comment_content" cols="40" rows="8" ></textarea>
+        <input type="submit" value="Submit"/>
+    </form>
+    {% endif %}
+    
+    <ul>
+    {% for comment use.your_comment.all %}
+        <li>
+            <a href="{% url 'accounts:profile' comment.me.pk %}">{{comment.me.username}}</a> - {{comment.content}}
+        </li>
+    {% endfor %}
+    </ul>
+    
+    
+</body>
+</html>

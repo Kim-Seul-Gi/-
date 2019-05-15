@@ -1,8 +1,13 @@
+<ul>
 {% for genre in genres %}
-<span><a href="{% url 'movies:genre_movies' genre.id %}">{{genre}}</a>:</span>
-    {% for movie in genre.genre_movies.all %}
-        <span>{{movie}},</span>
-    {% endfor %}
-    
-    <br><br><br>
+    <li>
+        <span><a href="{% url 'movies:genre_movies' genre.id %}">{{genre}}</a>:</span>
+            {% for movie in genre.genre_movies.all %}
+                <p>{{movie}}</p>
+            {% endfor %}
+            
+            <br><br><br>  
+    </li>
+
 {% endfor %}
+</ul>

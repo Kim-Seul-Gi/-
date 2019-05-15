@@ -1,0 +1,5 @@
+<h1>검색 결과에 따른 영화목록</h1>
+{% for movie in movies %}
+<a href="{% url 'movies:movie_detail' movie.id %}">{{movie}}</a>
+<br>
+{% endfor %}

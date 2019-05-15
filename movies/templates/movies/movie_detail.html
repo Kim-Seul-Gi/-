@@ -3,21 +3,35 @@
 <h1>{{movie}}</h1>
 <img src="{{movie.imageurl}}"><br>
 감독 : <a href="{% url 'movies:director' movie.director.id %}">{{movie.director}}</a><br>
+<p>장르 : 
 {% for genre in movie.genres.all %}
 {{genre}}
-{% endfor %}
+{% endfor %}</p>
+<p>개봉일 : {{movie.release_date}}</p>
+<br>
+{{movie.overview}}
 <br><br>
-
-
 <h2>댓글목록</h2>
+<span id="edit_score">
 {% for score in movie.movie_scores.all %}
     작성자 : {{score.user}} , score : {{score.score}} , 내용 : {{score.content}}
     {% if user == score.user or user.is_superuser %}
-    <a href="{% url 'movies:delete_score' movie.id score.id %}">댓글 삭제하기</a>
+        <span @click="turn_shows({{ forloop.counter0 }})"> , 수정하기</span>
+        <span v-if="out"></span>
+        <span v-if="shows[{{ forloop.counter0 }}]">
+            <form method="POST" action="{% url 'accounts:edit_score' movie.pk score.pk %}">
+                {% csrf_token %}
+                score : <input type="number" min="1" max="10" name="edit_score" value={{score.score}}>
+                <textarea name="edit_score_content" cols="20" rows="4" >{{score.content}}</textarea>
+                <input type='submit'>
+            </form>    
+        </span>
+        <span> , </span><a href="{% url 'movies:delete_score' movie.id score.id %}">댓글 삭제하기</a>
     {% endif %}
     
     <br>
-{% endfor %}    
+{% endfor %}
+</span>
     
     {% if user.is_authenticated %}
     <h2>댓글달기</h2>
@@ -29,15 +43,30 @@
     </form>
     {% endif %}
 
-
-
-
 <h3>배우 목록</h3>
 {% for actor in movie.movie_actors.all %}
 <a href="{% url 'actors:actor_detail' actor.id %}">{{actor}}</a>
 <br>
 {% endfor %}
 
-
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    const edit_score_vue = new Vue({
+        el:'#edit_score',
+        data:{
+            shows:new Array({{movie.movie_scores.all.count}}),
+            out:true
+        },
+        methods:{
+            turn_shows:(index)=>{
+                console.log(index)
+                console.log(edit_score_vue.shows[index])
+                if(edit_score_vue.shows[index]) edit_score_vue.shows[index] = false
+                else edit_score_vue.shows[index] = true
+                edit_score_vue.out = !edit_score_vue.out
+            },
+        }
+    })
+</script>
 
 

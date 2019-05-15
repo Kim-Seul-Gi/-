@@ -9,11 +9,11 @@
     <a href="#">좋은 배우 추가</a>
     {% endif %}
     
-    {% if actor.instagram %}
+    <br>{% if actor.instagram %}
         <a href="{{actor.instagram}}"><img src="{% static 'actors/instagram_icon.png' %}" width="22px" height="22px"></a><br>
     {% endif %}
     {% if actor.twitter %}
-        <a href="{{actor.twitter}}"><img src="{% static 'actors/twitter_icon.png' %}" width="22px" height="225px"></a><br>
+        <a href="{{actor.twitter}}"><img src="{% static 'actors/twitter_icon.png' %}" width="22px" height="22px"></a><br>
     {% endif %}
     {% if actor.facebook %}
         <a href="{{actor.facebook}}"><img src="{% static 'actors/facebook_icon.png' %}" width="22px" height="22px"></a><br>
