@@ -26,9 +26,9 @@ def show_movies(me):
         for score in movie.movie_scores.all():
             temp = 0
             if Me_you_similar.objects.filter(me = me , you = score.user):
-                temp = Me_you_similar.objects.filter(me = me , you = score.user)[0].silmilar
+                temp = Me_you_similar.objects.filter(me = me , you = score.user)[0].out()
             elif Me_you_similar.objects.filter(me = score.user , you = me):
-                temp = Me_you_similar.objects.filter(me = score.user , you = me)[0].silmilar
+                temp = Me_you_similar.objects.filter(me = score.user , you = me)[0].out()
             temp *= score.score
             man_score += temp
             cnt += 1
@@ -111,12 +111,19 @@ def movie_lists(request):
     
     if not request.user.is_authenticated:
         return redirect("accounts:login")
-    
+        
+    scores = len(Score.objects.filter(user=request.user).all()) # 회원이 score를 남기지 않은 경우에는 그 사람이 좋아하는 장르를 우선적으로 노출시키겠습니다.
+
     movies = show_movies(request.user)
     best_genre = show_genre() # 신욱형이 만든 장르별 영화추천
     best_movies = show_bestmovies() # 김슬기가 만든 영화추천
- 
-    context = {'movies':movies,'best_genre':best_genre, 'best_movies':best_movies}
+    
+    movies = movies[2:] + movies[0:2]
+    best_genre = best_genre[2:] + best_genre[0:2]
+    best_movies = best_movies[2:] + best_movies[0:2]
+
+    context = {'movies':movies,'best_genre':best_genre, 'best_movies':best_movies, 'scores':scores}
+    
     return render(request, 'movies/movies_list.html', context)
     
 def movie_detail(request, movie_id):
@@ -169,7 +176,8 @@ def movie_evaluate(request):
     context = {'movies':movies, 'genres':genres}
     return render(request, 'movies/movie_evaluate.html', context)
   
-@login_required 
+@login_required
+@require_POST
 def delete_score(request, movie_id, score_id):
     score = get_object_or_404(Score, pk=score_id)
     movie = get_object_or_404(Movie, pk=movie_id)

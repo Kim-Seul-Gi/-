@@ -77,9 +77,9 @@ class Me_you_similar(models.Model):
             size = (self.my_sum_score*self.you_sum_score)**0.5
             if size != 0:
                 movie_similar = self.movie_sum/size
-                self.silmilar = movie_similar+self.cal_genre()*0.3
+                self.silmilar = movie_similar
             else:
-                self.silmilar = self.cal_genre()*0.6
+                self.silmilar = 0
             
     def remove_movie(self,movie):
         if movie.movie_scores.filter(user = self.you) and movie.movie_scores.filter(user = self.me):
@@ -92,9 +92,9 @@ class Me_you_similar(models.Model):
             size = (self.my_sum_score*self.you_sum_score)**0.5
             if size != 0:
                 movie_similar = self.movie_sum/size
-                self.silmilar = movie_similar+self.cal_genre()*0.3
+                self.silmilar = movie_similar
             else:
-                self.silmilar = self.cal_genre()*0.6
+                self.silmilar = 0
 
     def cal_genre(self):
         me_genres = [self.me.like_genre_1,self.me.like_genre_2,self.me.like_genre_3]
@@ -105,7 +105,7 @@ class Me_you_similar(models.Model):
             if x and x in you_genres:
                 out += 1
                 
-        return out
+        return out/3
     
     def update(self):
         self.silmilar = self.movie_sum = self.you_sum_score = self.my_sum_score = 0
@@ -113,6 +113,10 @@ class Me_you_similar(models.Model):
             self.add_movie(score.movie)
         for score in self.you.score_set.all():
             self.add_movie(score.movie)
+            
+    def out(self):
+        return (self.silmilar+self.cal_genre())/2
+        
             
     
     

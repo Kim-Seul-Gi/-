@@ -32,7 +32,7 @@
                 <form class="search search-bar-box" :action=`/movies/view_movies/${movie_title}` class="search-bar-box">
                     <input type="search" v-model="movie_title" @keyup.enter="submit" placeholder="영화 검색!" class="animated-search-form">
                     
-                        <ul class="results" >
+                        <ul class="results">
                             
                             <li class="search-result-box" v-for="answer in answers">
                                 <a :href=`/movies/view_movies/${movie_title}`>
@@ -60,10 +60,8 @@
                 </button>
             </div>
             <div id="nav-collapsed-side-bar">
-                <a href="#">My Page</a>
                 <!--<a href="#">For you</a>-->
                 <a href="{% url 'movies:movie_list' %}">For you</a>
-                <a href="#">Q & A</a>
                 <a href="#">Sign Up</a> {% if user.is_authenticated %}
                 <a href="{% url 'accounts:logout' %}">Logout</a> {% endif %}
                 <hr id="nav-collapsed-side-bar-hr">
@@ -93,7 +91,7 @@
                 </div>
             </div>
             <hr id="movie-title-bar">
-            <div class="detail-movie-comment" id="edit_score">
+            <div class="detail-movie-comment">
                 <!--리뷰 작성하기-->
                 <div class="comment-create">
                     {% if user.is_authenticated %}
@@ -101,16 +99,17 @@
                         <form method="POST">
                             {% csrf_token %}
                             
-                            <!--score : <input type="number" min="1" max="10" name="score" value=0>-->
-                            <div id="star">
-                                <star-rating :increment="0.5" 
-                                                inactive-color="#fff"
-                                                active-color="rgba(121, 7, 242, 0.8)"
-                                                glow=5
-                                                border-width=0
-                                                rounded-corners=True>
-                                </star-rating>
-                            </div>
+                            score : <input type="number" min="1" max="10" name="score" value=0>
+                            <!--<div id="star">-->
+                            <!--    <star-rating :increment="1" -->
+                            <!--                    border-width=0-->
+                            <!--                    rounded-corners='True'-->
+                            <!--                    inactive-color="#fff"-->
+                            <!--                    active-color="rgba(121, 7, 242, 0.8)"-->
+                            <!--                    star-size="35"-->
+                            <!--                    show-rating='false'>-->
+                            <!--    </star-rating>-->
+                            <!--</div>-->
                             {{score_form}}
                             
                             <input type='submit'>
@@ -118,37 +117,30 @@
                     {% endif %}
                 </div>
                 
-                <div class="comment-list" id="edit_score">
+                <div class="comment-list">
                     <h2>리뷰 목록</h2>
                     
                     <div id="comment-list-each">
                         {% for score in movie.movie_scores.all %}
                         <p class="comment-user">{{score.user}}</p>
                         <p class="comment-content-inside">{{score.content}}</p>
-                        <div id="star">
-                            <star-rating :increment="0.5" 
-                                            inactive-color="#000"
-                                            active-color="rgba(121, 7, 242, 0.8)"
-                                            glow=5
-                                            border-width=0
-                                            rounded-corners=True>
-                            </star-rating>
-                        </div>
                         score : {{score.score}}
                         
                             <!--리뷰 수정하기-->
                             {% if user == score.user or user.is_superuser %}
-                                <span @click="turn_shows({{ forloop.counter0 }})"> , 수정하기</span>
+                                <span id="edit-button" @click="turn_shows({{ forloop.counter0 }})" style="
+                                
+                                ">수정하기</span>
                                 <span v-if="out"></span>
                                 <span v-if="shows[{{ forloop.counter0 }}]">
                                     <form method="POST" action="{% url 'accounts:edit_score' movie.pk score.pk %}">
                                         {% csrf_token %}
-                                        score : <input type="number" min="1" max="10" name="edit_score" value={{score.score}}>
+                                        score : <input type="number" min="1" max="10" name="edit_score" value={{score.score}}><br>
                                         <textarea name="edit_score_content" cols="20" rows="4" >{{score.content}}</textarea>
                                         <input type='submit'>
                                     </form>    
                                 </span>
-                                <span> , </span><a href="{% url 'movies:delete_score' movie.id score.id %}">댓글 삭제하기</a>
+                                <span> , </span><a href="#" @click="delete_score({{ forloop.counter0 }} , {{movie.pk}} , {{score.pk}})">댓글 삭제하기</a>
                             {% endif %}
                             
                         {% endfor %}
@@ -176,25 +168,6 @@
     </section>
     
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <script>
-        const edit_score_vue = new Vue({
-            el:'#edit_score',
-            data:{
-                shows:new Array({{movie.movie_scores.all.count}}),
-                out:true,
-                rating: 0,
-            },
-            methods:{
-                turn_shows:(index)=>{
-                    console.log(index)
-                    console.log(edit_score_vue.shows[index])
-                    if(edit_score_vue.shows[index]) edit_score_vue.shows[index] = false
-                    else edit_score_vue.shows[index] = true
-                    edit_score_vue.out = !edit_score_vue.out
-                },
-            }
-        })
-    </script>
     <script>
     // Side bar ===============================================================
         let sideBarStatus = false
@@ -286,7 +259,9 @@
     </script>
     <!--Vue-->
     <script>
-    Vue.component('star-rating', VueStarRating.default)
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = 'X-CSRFToken'
         const app = new Vue ({
             delimiters: ['${', '}'],
             el : '#detail',
@@ -297,6 +272,10 @@
                 count : 0,
                 click_genres : [],
                 rating: 0,
+                
+                //-----------------------
+                shows:new Array({{movie.movie_scores.all.count}}),
+                out:false,
                 
             },
             
@@ -331,6 +310,22 @@
                             window.location.replace("/movies/movielist/")
                             
                         })
+                },
+                
+                turn_shows:function(index){
+                    console.log(index)
+                    if(this.shows[index]) this.shows[index] = false
+                    else this.shows[index] = true
+                    this.out = !this.out
+                },
+                delete_score:function(index,movie_id,score_id){
+                    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+                    const url = `http://tmp-movie-recommend-rlatmf2147.c9users.io:8080/movies/${movie_id}/delete_score/${score_id}/`
+                    axios.post(url)
+                    for(let i=index+1;i<this.shows.length;i++) this.shows[i-1] = this.shows[i]
+                    this.shows.pop()
+                    this.out = !this.out
+                    
                 },
                 
                 
@@ -394,9 +389,6 @@
                         this.count += 1
                         squareFlipCard.classList.add('genre-checked')
                     }
-                },
-                setRating: function(rating){
-                this.rating= rating;
                 },
     
                 

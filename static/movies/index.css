@@ -53,6 +53,33 @@ nav {
   }
 }
 
+#loader-text {
+    -webkit-animation: neon2 1.5s ease-out infinite alternate; 
+}
+
+@-webkit-keyframes neon2 {
+  from {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px  #fff,
+               0 0 30px  #fff,
+               0 0 40px  #800080,
+               0 0 70px  #800080,
+               0 0 80px  #800080,
+               0 0 100px #800080,
+               /* 0 0 100px rgb(129, 17, 124); */
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+               0 0 10px #fff,
+               0 0 15px #fff,
+               0 0 20px #800080,
+               0 0 35px #800080,
+               0 0 40px #800080,
+               0 0 50px #800080,
+               0 0 75px rgba(255, 153, 0, 0.767);
+  }
+}
+
 #nav-auth {
     width: 5%;
     height: 100%;

@@ -10,8 +10,10 @@ from .forms import UserCustomCreationForm, UserCustomAuthenticationForm
 import random
 
 from .models import Me_you_similar,Score,Comment
+from accounts.models import Score
 from movies.models import Genre, Movie
 from actors.models import Actor
+
 # Create your views here.
 
 def index(request):
@@ -109,14 +111,15 @@ def create_profile(request, user_pk):
     if len_profile_genres == 1:
         user.like_genre_1 = Genre.objects.filter(name=genres[0]).first()
     elif len_profile_genres == 2:
-        print('여기로 감??????????????')
         user.like_genre_1 = Genre.objects.filter(name=genres[0]).first()
         user.like_genre_2 = Genre.objects.filter(name=genres[1]).first()
     else:
         user.like_genre_1 = Genre.objects.filter(name=genres[0]).first()
-        user.like_genre_1 = Genre.objects.filter(name=genres[1]).first()
-        user.like_genre_2 = Genre.objects.filter(name=genres[2]).first()
-
+        user.like_genre_2 = Genre.objects.filter(name=genres[1]).first()
+        user.like_genre_3= Genre.objects.filter(name=genres[2]).first()
+    user.save()
+    
+    
     return redirect('movies:movie_list')
     
 @login_required

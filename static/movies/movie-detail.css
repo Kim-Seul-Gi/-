@@ -125,3 +125,11 @@ a {
     font-weight: bold;
     padding-bottom: 2%;
 }
+
+#edit-button {
+    color: rgba(34,139,34, 1);
+}
+
+#edit-button:hover {
+    color: rgba(34,139, 0, 0.5);
+}
