@@ -9,8 +9,8 @@ from .forms import UserCustomCreationForm, UserCustomAuthenticationForm
 
 import random
 
-from .models import Me_you_similar,Score
-from movies.models import Movie
+from .models import Me_you_similar,Score,Comment
+from movies.models import Genre, Movie
 from actors.models import Actor
 # Create your views here.
 
@@ -66,10 +66,14 @@ def logout(request):
 def profile(request,user_pk):
     User = get_user_model()
     user = get_object_or_404(User,pk=user_pk)
+    me = request.user
     
-    # if request.method=="POST" a:
-    #     a = 1
-    
+    if request.method=="POST" and me.is_authenticated and user != me:
+        comment = Comment()
+        comment.content = request.POST.get('comment_content')
+        comment.me = me
+        comment.you = user
+        comment.save()
     
     context = {'use':user}
     return render(request,'accounts/profile.html',context)
@@ -88,14 +92,31 @@ def follow(request,user_pk):
     
 def create_profile(request, user_pk):
     # 뽑아와서 저장만 한다.
-    # for 
     print(request.POST)
+    
+    # request.POST = {'genres' : ['드라마', '액션']}
+    
     user = get_object_or_404(get_user_model(), pk=user_pk)
-    genres = request.POST.get('genres')
+    genres = request.POST.get('genres') # dict 형식으로 옵니다.
     
+    print(genres) # 판타지,모험    / str 길이는 6
+    genres = genres.split(',') # [판타지, 모험]
     
+    print(len(genres)) # 2
+    print(type(genres)) # list   
+    len_profile_genres = len(genres)
     
-    print(genres)
+    if len_profile_genres == 1:
+        user.like_genre_1 = Genre.objects.filter(name=genres[0]).first()
+    elif len_profile_genres == 2:
+        print('여기로 감??????????????')
+        user.like_genre_1 = Genre.objects.filter(name=genres[0]).first()
+        user.like_genre_2 = Genre.objects.filter(name=genres[1]).first()
+    else:
+        user.like_genre_1 = Genre.objects.filter(name=genres[0]).first()
+        user.like_genre_1 = Genre.objects.filter(name=genres[1]).first()
+        user.like_genre_2 = Genre.objects.filter(name=genres[2]).first()
+
     return redirect('movies:movie_list')
     
 @login_required

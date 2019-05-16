@@ -64,4 +64,9 @@ class ScoreForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'rows':4, 'cols':30}),
         }
         
-  
+    def __init__(self, *args, **kwargs):
+        super(ScoreForm, self).__init__(*args, **kwargs)
+        self.fields['content'].widget = forms.TextInput(attrs={
+            'id': 'comment-content',
+            'class': 'comment-content-input',})
+     

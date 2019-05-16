@@ -167,7 +167,7 @@ html {
 
 #nav-collapsed-side-bar {
     background: black;
-    z-index: 6 !important;
+    z-index: 7 !important;
 }
 
 
@@ -285,7 +285,7 @@ html {
   justify-content: center;
   font-size: 3rem;
   color: white;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 /* cell number */
@@ -328,10 +328,9 @@ h3 {
 }
 
 .search-result-each > a {
-    display: inline !important;
+    display: inline-block !important;
     width: 20% !important;
 }
-
 .search-result-each > h3 {
     display: block;
     margin-top: 3%;
@@ -567,6 +566,7 @@ header {
 }
 
 .encircle-score {
+    text-decoration: none !important;
     border: 5px solid rgb(255,0,255, 0.5);
     width: 152px;
     height: 152px;
@@ -578,7 +578,6 @@ header {
     justify-content: center;
     background: rgba(0,0,0,0.7);
     border-radius: 50%;
-    text-decoration: none;
 }
 
 .bounce {
@@ -765,3 +764,4 @@ header {
   }
 
   }
+

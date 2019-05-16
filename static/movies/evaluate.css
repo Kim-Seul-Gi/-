@@ -543,10 +543,23 @@ footer > p {
 
 #preloader {
     display: none;
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.8);
     z-index: 100000;
+    
+    font-size: 2rem;
+}
+
+#loader-message {
+    font-size: 0.5rem;
+    position: inline-block;
+    z-index: 500;
+    top: 40;
+    margin-top: 40vh;
+    padding-top: 40vh;
 }
 
 #evaluation-list {
@@ -557,9 +570,9 @@ footer > p {
     
 }
 
-#evaluation-list > p {
-    display: inline-block;
-    text-align: center;
-    padding: 1% 1%;
-    font-size: 2rem;
-}
+/*#evaluation-list > p {*/
+/*    display: inline-block;*/
+/*    text-align: center;*/
+/*    padding: 1% 1%;*/
+/*    font-size: 0.5rem;*/
+/*}*/

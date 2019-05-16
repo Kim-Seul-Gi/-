@@ -1,72 +1,422 @@
-
-
-<h1>{{movie}}</h1>
-<img src="{{movie.imageurl}}"><br>
-감독 : <a href="{% url 'movies:director' movie.director.id %}">{{movie.director}}</a><br>
-<p>장르 : 
-{% for genre in movie.genres.all %}
-{{genre}}
-{% endfor %}</p>
-<p>개봉일 : {{movie.release_date}}</p>
-<br>
-{{movie.overview}}
-<br><br>
-<h2>댓글목록</h2>
-<span id="edit_score">
-{% for score in movie.movie_scores.all %}
-    작성자 : {{score.user}} , score : {{score.score}} , 내용 : {{score.content}}
-    {% if user == score.user or user.is_superuser %}
-        <span @click="turn_shows({{ forloop.counter0 }})"> , 수정하기</span>
-        <span v-if="out"></span>
-        <span v-if="shows[{{ forloop.counter0 }}]">
-            <form method="POST" action="{% url 'accounts:edit_score' movie.pk score.pk %}">
-                {% csrf_token %}
-                score : <input type="number" min="1" max="10" name="edit_score" value={{score.score}}>
-                <textarea name="edit_score_content" cols="20" rows="4" >{{score.content}}</textarea>
-                <input type='submit'>
-            </form>    
-        </span>
-        <span> , </span><a href="{% url 'movies:delete_score' movie.id score.id %}">댓글 삭제하기</a>
-    {% endif %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Teko" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon.png' %}" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'movies/hamburger.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/index.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/movielist.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/amimate.css' %}">
+    <link rel="stylesheet" href="{% static 'movies/movie-detail.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>BlockBuster</title>
+</head>
+<body>
     
-    <br>
-{% endfor %}
-</span>
+    <section id="detail">
+        <nav class="navbar">
+            <div id="nav-logo">
+                <a href="{% url 'movies:movie_index' %}"><img src="{% static 'logo.png' %}" alt=""></a>
+            </div>
+            <!--검색 후 다른 곳 눌렀을 때-->
+            <div class="search-bar-box">
+                <!--<input type="search" v-model="movie_title" placeholder="영화 검색!" class="animated-search-form">-->
+                <form class="search search-bar-box" :action=`/movies/view_movies/${movie_title}` class="search-bar-box">
+                    <input type="search" v-model="movie_title" @keyup.enter="submit" placeholder="영화 검색!" class="animated-search-form">
+                    
+                        <ul class="results" >
+                            
+                            <li class="search-result-box" v-for="answer in answers">
+                                <a :href=`/movies/view_movies/${movie_title}`>
+                                    <div class="search-result-each">
+                                        <a :href=`/movies/${answer.id}/`><img :src=`${answer.imageurl}` width=200px height=250px></a>
+                                        <h3>${answer.title}</h3>
+                                        <p>${answer.movie_scores}</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <!--<li><a href="#">Search Result #1<br /><span>Description...</span></a></li>-->
+                            <!--<li><a href="#">">Search Result #2<br /><span>Description...</span></a></li>-->
+                            <!--<li><a href="#">">Search Result #3<br /><span>Description...</span></a></li>-->
     
-    {% if user.is_authenticated %}
-    <h2>댓글달기</h2>
-    <form method="POST">
-        {% csrf_token %}
-        score : <input type="number" min="1" max="10" name="score" value=0>
-        {{score_form}}
-        <input type='submit'>
-    </form>
-    {% endif %}
+                        </ul>
+                </form>
+                
+                </div>
+            <div id="nav-auth">
+                <!-- <button class="openbtn" onclick="openNav()">&#9776;</button>. -->
+                <button id="hamburgerBtn" class="openbtn closebtn hamburger hamburger--collapse " onclick="hamburger()" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+            <div id="nav-collapsed-side-bar">
+                <a href="#">My Page</a>
+                <!--<a href="#">For you</a>-->
+                <a href="{% url 'movies:movie_list' %}">For you</a>
+                <a href="#">Q & A</a>
+                <a href="#">Sign Up</a> {% if user.is_authenticated %}
+                <a href="{% url 'accounts:logout' %}">Logout</a> {% endif %}
+                <hr id="nav-collapsed-side-bar-hr">
+                <div id="nav-collapsed-side-bar-quote">
+                    <p>"His hair smelled like watermellon"
+                        <br><br> - Flipped
+                    </p>
+                </div>
+            </div>
+        </nav>    
+        
+        
+        <!--영화 정보 시작-->
+        <article class="detail-wrapper">
+            <h1 id="movie-title">{{movie.title}}</h1>
+            <hr id="movie-title-bar">
+            <div class="detail-movie-info">
+                
+                <div class="detail-movie-info-left">
+                    <img src="{{movie.imageurl}}"><br>
+                </div>
+                <div class="detail-movie-info-right">
+                    <p>감독 : <a href="{% url 'movies:director' movie.director.id %}" id="movie-director">{{movie.director}}</a></p>
+                    <p>장르 : {% for genre in movie.genres.all %} {{genre}} {% endfor %}</p>
+                    <p>개봉일 : {{movie.release_date}}</p>
+                    <p>{{movie.overview|truncatechars:250}}</p>
+                </div>
+            </div>
+            <hr id="movie-title-bar">
+            <div class="detail-movie-comment" id="edit_score">
+                <!--리뷰 작성하기-->
+                <div class="comment-create">
+                    {% if user.is_authenticated %}
+                        <h2>리뷰 작성하기<h2>
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            <!--score : <input type="number" min="1" max="10" name="score" value=0>-->
+                            <div id="star">
+                                <star-rating :increment="0.5" 
+                                                inactive-color="#fff"
+                                                active-color="rgba(121, 7, 242, 0.8)"
+                                                glow=5
+                                                border-width=0
+                                                rounded-corners=True>
+                                </star-rating>
+                            </div>
+                            {{score_form}}
+                            
+                            <input type='submit'>
+                        </form>
+                    {% endif %}
+                </div>
+                
+                <div class="comment-list" id="edit_score">
+                    <h2>리뷰 목록</h2>
+                    
+                    <div id="comment-list-each">
+                        {% for score in movie.movie_scores.all %}
+                        <p class="comment-user">{{score.user}}</p>
+                        <p class="comment-content-inside">{{score.content}}</p>
+                        <div id="star">
+                            <star-rating :increment="0.5" 
+                                            inactive-color="#000"
+                                            active-color="rgba(121, 7, 242, 0.8)"
+                                            glow=5
+                                            border-width=0
+                                            rounded-corners=True>
+                            </star-rating>
+                        </div>
+                        score : {{score.score}}
+                        
+                            <!--리뷰 수정하기-->
+                            {% if user == score.user or user.is_superuser %}
+                                <span @click="turn_shows({{ forloop.counter0 }})"> , 수정하기</span>
+                                <span v-if="out"></span>
+                                <span v-if="shows[{{ forloop.counter0 }}]">
+                                    <form method="POST" action="{% url 'accounts:edit_score' movie.pk score.pk %}">
+                                        {% csrf_token %}
+                                        score : <input type="number" min="1" max="10" name="edit_score" value={{score.score}}>
+                                        <textarea name="edit_score_content" cols="20" rows="4" >{{score.content}}</textarea>
+                                        <input type='submit'>
+                                    </form>    
+                                </span>
+                                <span> , </span><a href="{% url 'movies:delete_score' movie.id score.id %}">댓글 삭제하기</a>
+                            {% endif %}
+                            
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <hr id="movie-title-bar">
+                <!--배우 목록-->
+                <h2>배우 목록</h2>
+                <div class="carousel"
+                        data-flickity='{ "wrapAround": true }'>
+                    {% for actor in movie.movie_actors.all|slice:"10" %}
+                        {% if actor.imageurl %}
+                        <a href="{% url 'actors:actor_detail' actor.id %}" class="carousel-cell" style="background: url('{{actor.imageurl}}')">
+                            <p class="actor-name" style="">{{ actor.name }}</p>
+                        </a>
+                        {% endif %}
+                    <!--</a>-->
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
 
-<h3>배우 목록</h3>
-{% for actor in movie.movie_actors.all %}
-<a href="{% url 'actors:actor_detail' actor.id %}">{{actor}}</a>
-<br>
-{% endfor %}
-
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script>
-    const edit_score_vue = new Vue({
-        el:'#edit_score',
-        data:{
-            shows:new Array({{movie.movie_scores.all.count}}),
-            out:true
-        },
-        methods:{
-            turn_shows:(index)=>{
-                console.log(index)
-                console.log(edit_score_vue.shows[index])
-                if(edit_score_vue.shows[index]) edit_score_vue.shows[index] = false
-                else edit_score_vue.shows[index] = true
-                edit_score_vue.out = !edit_score_vue.out
+    
+    </section>
+    
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script>
+        const edit_score_vue = new Vue({
+            el:'#edit_score',
+            data:{
+                shows:new Array({{movie.movie_scores.all.count}}),
+                out:true,
+                rating: 0,
             },
+            methods:{
+                turn_shows:(index)=>{
+                    console.log(index)
+                    console.log(edit_score_vue.shows[index])
+                    if(edit_score_vue.shows[index]) edit_score_vue.shows[index] = false
+                    else edit_score_vue.shows[index] = true
+                    edit_score_vue.out = !edit_score_vue.out
+                },
+            }
+        })
+    </script>
+    <script>
+    // Side bar ===============================================================
+        let sideBarStatus = false
+        function openNav() {
+            document.getElementById("nav-collapsed-side-bar").style.width = "400px";
+            document.getElementById("nav-auth").style.marginLeft = "250px";
         }
+
+        /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("nav-collapsed-side-bar").style.width = "0";
+            document.getElementById("nav-auth").style.marginLeft = "0";
+        }
+            
+        // hamburger trigger
+        function hamburger() {
+            const hamburgerClassList = document.querySelector("#hamburgerBtn")
+            const navSideBar = document.querySelector('#nav-collapsed-side-bar')
+            if (hamburgerClassList.classList.contains("is-active")) {
+                hamburgerClassList.classList.remove("is-active")
+                document.getElementById("nav-collapsed-side-bar").style.width = "0";
+                document.getElementById("nav-auth").style.marginLeft = "0";
+                document.getElementById("nav-auth").style.zIndex = '100';
+                navSideBar.style.zIndex = '1';
+            } else {
+                hamburgerClassList.classList.add("is-active")
+                document.getElementById("nav-collapsed-side-bar").style.width = "400px";
+                document.getElementById("nav-auth").style.marginLeft = "250px";
+                document.getElementById("nav-auth").style.zIndex = '100';
+                navSideBar.style.zIndex = '1';
+            }
+        }
+    // Side bar END ===============================================================
+    
+    
+    // Nav bar ===============================================================
+        window.addEventListener('scroll', function() {
+            let navbar = document.querySelector('.navbar')
+            let hamburgerBtn = document.querySelector('#nav-auth')
+            if (document.documentElement.scrollTop > 30){
+
+                navbar.classList.add('sticky-top')
+                hamburgerBtn.classList.add('sticky-top-hamburger')
+                
+            } else {
+
+                navbar.classList.remove('sticky-top')
+                hamburgerBtn.classList.remove('sticky-top-hamburger')
+            }
+        })
+    // Nav bar END ===============================================================
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    
+    // Next/previous controls
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    // Thumbnail image controls
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1} 
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none"; 
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block"; 
+      slides[slideIndex-1].style.height = "70vh"; 
+      dots[slideIndex-1].className += " active";
+    }
+    
+    // 검색 결과창 없애기
+    document.querySelector('body').addEventListener('click', function() {
+        const SearchMovie = document.querySelector('#search-result')
+        console.log("test man")
+        SearchMovie.style.display = "none"
     })
-</script>
-
-
+    
+    </script>
+    <!--Vue-->
+    <script>
+    Vue.component('star-rating', VueStarRating.default)
+        const app = new Vue ({
+            delimiters: ['${', '}'],
+            el : '#detail',
+            data : {
+                movie_title : '',
+                answers : '',
+                answersView : false,
+                count : 0,
+                click_genres : [],
+                rating: 0,
+                
+            },
+            
+            methods : {
+                create_profile : function(user_pk) {
+                    
+                    
+                    let formdata = new FormData()
+                    const preLoader = document.querySelector('#preloader')
+                    formdata.set('genres', this.click_genres)
+               
+                    
+                    data = {'genres' : this.click_genres}
+                    
+                    // 인터셉터 사용해서 로딩 화면 구현 ! 
+                    axios.interceptors.request.use(function (config) {
+                        // Do something before request is sent
+                        preLoader.style.display = "block"
+                        return config
+                      }, function (error) {
+                        // Do something with request error
+                        console.log("egg");
+                      });
+                    
+                    axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+                    axios.defaults.xsrfCookieName = 'csrftoken'
+                    axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+                    axios.post(`/accounts/${user_pk}/create_profile/`, formdata)
+                        .then(response => 
+                        {
+                            // preLoader.style.display = "block"
+                            window.location.replace("/movies/movielist/")
+                            
+                        })
+                },
+                
+                
+                find_movie : function(movie_title) {
+                    const url = `http://tmp-movie-recommend-rlatmf2147.c9users.io:8080/movies/search_movie/${movie_title}/`
+                    const resultBox = document.querySelector('.results')
+                    resultBox.style.display = "block"
+                    
+                    window.addEventListener("click", function(){
+                        resultBox.style.display = "none"
+                    })
+                    
+                    if (movie_title) {
+                        axios.get(url)
+                        .then(response => { 
+                            this.answers = response.data
+                            console.log(response.data)
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                    } else {
+                        this.answers = '해당하는 영화는 없습니다.'
+                        return
+                    }
+                 },
+                
+                clickclick : function() {
+                    console.log(this.count)
+                    this.count +=1
+                },
+                
+                // 이미지를 누른 상태가 되었을 경우 이미지의 카운트를 확인하기 위함입니다.
+                click_genre : function(genre) {
+                    
+                    const isitclicked = document.querySelector(`#isitclicked-${genre}`)
+                    const squareFlipCard = document.querySelector(`.suqare-flip-card-${genre}`)
+                    
+                    console.log(isitclicked)
+                    if (typeof(isitclicked.clicked) === 'undefined') { 
+                        isitclicked.clicked = true
+                        this.click_genres.push(genre)
+                        console.log(this.click_genres)
+                        this.count += 1
+                        squareFlipCard.classList.add('genre-checked')
+                    }
+                    else if (isitclicked.clicked === true) {
+                        let idx;
+                        for (idx = 0; idx < this.count; idx ++) {
+                            if (this.click_genres[idx]===genre) {
+                            isitclicked.clicked = false
+                            this.click_genres.splice(idx, 1)
+                            this.count -= 1 
+                            squareFlipCard.classList.remove('genre-checked')
+                            }
+                        }
+                    }
+                    else if (isitclicked.clicked === false) {  
+                        isitclicked.clicked = true 
+                        this.click_genres.push(genre)
+                        this.count += 1
+                        squareFlipCard.classList.add('genre-checked')
+                    }
+                },
+                setRating: function(rating){
+                this.rating= rating;
+                },
+    
+                
+            },
+            
+            watch : {
+                movie_title : function() {
+                    if (this.movie_title!=0) {
+                    this.find_movie(this.movie_title)
+                    } 
+                    if (this.movie_title===""){
+                        this.answers = ""
+                    }
+                    
+                }
+            }
+            
+        })
+    
+    </script>
+    
+</body>
+</html>
